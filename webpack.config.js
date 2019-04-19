@@ -2,7 +2,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  watch: false, 
+  watch: true,
+  watchOptions: {
+    ignored: ['dist', 'node_modules']
+  },
   mode: 'development', 
   entry: './src/index.js',
   output: {
@@ -23,6 +26,10 @@ module.exports = {
         // query: {
         //   presets: ["@babel/preset-react"]
         // }
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       }
     ]
   },
