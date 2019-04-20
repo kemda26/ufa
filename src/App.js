@@ -1,39 +1,43 @@
 import React, { Component } from 'react'
-// import Header from './components/Header/Header.jsx'
 import NavBar from './components/NavBar/NavBar'
 import SideNav from './components/SideNav/SideNav'
 import Backdrop from './components/Backdrop/Backdrop'
+import SignUpForm from './components/SignUp/SignUpForm'
 
 export class App extends Component {
     state = {
-        sideNavOpen: true
+        sideNavOpen: true,
+        signUpVisible: false,
     }
 
     toggleSideButtonHandler = () => {
-        this.setState((prevState) => {
-            return {sideNavOpen: !prevState.sideNavOpen}
-        })
+        this.setState((prevState) => {return {sideNavOpen: !prevState.sideNavOpen}})
     }
 
     backdropClickHandler = () => {
-        this.setState({sideNavOpen: false})
+        this.setState({signUpVisible: false})
+    }
+
+    signUpFormHandler = () => {
+        this.setState({signUpVisible: true})
     }
 
   render() {
-    let backdrop;
-
-    if (this.state.sideNavOpen) {
+    let backdrop, signUpForm;
+    if (this.state.signUpVisible) {
         backdrop = <Backdrop backdropClickHandler={this.backdropClickHandler} />
+    }
+
+    if (this.state.signUpVisible) {
+        signUpForm = <SignUpForm />
     }
 
     return (
       <div style={{height: '100%'}}>
-        <NavBar toggleSideNavHandler={this.toggleSideButtonHandler} />
+        <NavBar toggleSideNavHandler={this.toggleSideButtonHandler} signUpFormHandle={this.signUpFormHandler} />
         <SideNav showUp={this.state.sideNavOpen} />
+        {signUpForm}
         {backdrop}
-        <main style={{height: '64px'}}>
-            <p>PARAGRAPH</p>
-        </main>
       </div>
     )
   }

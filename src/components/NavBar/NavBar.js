@@ -16,7 +16,7 @@ const NavBar = (props) => {
             <SearchBar />
         </div>
         <div className='navbar_list'>
-            <button className='signup_btn'>Sign Up</button>
+            <button className='signup_btn' onClick={props.signUpFormHandle} >Sign Up</button>
             <button className='signin_btn'>Sign In</button>
         </div>
       </nav>
