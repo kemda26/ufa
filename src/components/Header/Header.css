@@ -1,0 +1,9 @@
+.header {
+    box-sizing: border-box;
+    position: static;
+    /* height: 100px; */
+    width: 100%;
+    background-color: aquamarine;
+    display: flex;
+}
+

@@ -1,0 +1,10 @@
+.searchbar input[type=text] {
+    border-radius: 0;
+    background: red;
+    padding: 2px;
+}
+
+.searchbar button {
+    display: inline;
+    border-radius: 0;
+}

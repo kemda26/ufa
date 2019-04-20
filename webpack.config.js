@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  watch: true,
+  watch: false,
   watchOptions: {
     ignored: ['dist', 'node_modules']
   },
