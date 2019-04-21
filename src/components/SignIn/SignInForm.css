@@ -1,10 +1,4 @@
-/* .signup_modal {
-    z-index: 3;
-    position: fixed;
-
-} */
-
-.signup_form {
+.signin_form {
     background-color: #fefefe;
     border: 1px solid rgb(172, 172, 172);
     margin: 15% 30%;
@@ -13,6 +7,29 @@
     box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.75);
     z-index: 3;
     position: fixed;
+}
+
+.signin_form input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.signin_form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.signin_form button:hover {
+    opacity: 0.8;
 }
 
 .animate {

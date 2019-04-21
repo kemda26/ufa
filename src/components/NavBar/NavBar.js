@@ -12,12 +12,14 @@ const NavBar = (props) => {
         </div>
         <div className='navbar_logo'><a href='/'>uFacilities</a></div>
         <div className='spacer' />
-        <div>
-            <SearchBar />
+        <div className='search_bar'>
+            <input type='text' placeholder='Seach...'  />
+            <button type='submit'><i className="fa fa-search" ></i></button>
         </div>
+        <div className='spacer' />
         <div className='navbar_list'>
             <button className='signup_btn' onClick={props.signUpFormHandle} >Sign Up</button>
-            <button className='signin_btn'>Sign In</button>
+            <button className='signin_btn' onClick={props.signInFormHandle}>Sign In</button>
         </div>
       </nav>
     </header>

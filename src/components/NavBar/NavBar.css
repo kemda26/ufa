@@ -31,19 +31,8 @@
     flex: 1;
 }
 
-.navbar_list {
-    padding-left: 30rem;
-}
-
-/* .navbar_list ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-.navbar_list li {
-    padding: 0 0.5rem;
+/* .navbar_list {
+    padding-left: 30%;
 } */
 
 .signin_btn {
@@ -94,4 +83,22 @@
 .navbar_list a:hover,
 .navbar_list a:active {
     color: cyan;
+}
+
+.search_bar {
+    width: 40%;
+    display: flex;
+}
+
+.search_bar input[type=text] {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    width: 100%;
+}
+
+.search_bar button {
+    background-color: rgb(185, 185, 185);
+    border: 1px solid #ccc;
+    cursor: pointer;
+    padding: 6px 10px;
 }
