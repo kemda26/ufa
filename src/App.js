@@ -1,62 +1,29 @@
 import React, { Component } from 'react'
 import NavBar from './components/NavBar/NavBar'
-import SideNav from './components/SideNav/SideNav'
-import Backdrop from './components/Backdrop/Backdrop'
-import SignUpForm from './components/SignUp/SignUpForm'
-import SignInForm from './components/SignIn/SignInForm'
+import DepartmentTable from './components/Manager/DepartmentTable'
+import AccountTable from './components/Manager/AccountTable'
+import ResearchTable from './components/Manager/ReseachTable'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 export class App extends Component {
     state = {
-        sideNavOpen: true,
-        signUpVisible: false,
-        signInVisible: false
+
     }
 
-    toggleSideButtonHandler = () => {
-        this.setState((prevState) => {return {sideNavOpen: !prevState.sideNavOpen}})
-    }
+    render() {
 
-    backdropClickHandler = () => {
-        this.setState({signUpVisible: false})
-        this.setState({signInVisible: false})
+        return (
+            <Router>
+                <div style={{ height: '100%' }}>
+                    <NavBar />
+                    {/* <DepartmentTable /> */}
+                    {/* <AccountTable />  */}
+                    <Route path="/manage/departments" component={DepartmentTable} />
+                    <ResearchTable /> 
+                </div>
+            </Router>
+        )
     }
-
-    signUpFormHandler = () => {
-        this.setState({signUpVisible: true})
-    }
-
-    signInFormHandler = () => {
-        this.setState({signInVisible: true})
-    }
-
-  render() {
-    let backdrop, signUpForm, signInForm;
-    if (this.state.signUpVisible || this.state.signInVisible) {
-        backdrop = <Backdrop backdropClickHandler={this.backdropClickHandler} />
-    }
-
-    if (this.state.signUpVisible) {
-        signUpForm = <SignUpForm />
-    }
-
-    if (this.state.signInVisible) {
-        signInForm = <SignInForm />
-    }
-
-    return (
-      <div style={{height: '100%'}}>
-        <NavBar 
-            toggleSideNavHandler={this.toggleSideButtonHandler} 
-            signUpFormHandle={this.signUpFormHandler} 
-            signInFormHandle={this.signInFormHandler}
-        />
-        <SideNav showUp={this.state.sideNavOpen} />
-        {signUpForm}
-        {signInForm}
-        {backdrop}
-      </div>
-    )
-  }
 }
 
 export default App

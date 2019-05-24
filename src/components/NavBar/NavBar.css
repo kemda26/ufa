@@ -2,7 +2,7 @@
     /* display: inline; */
     width: 100%;
     position: fixed;
-    background-color: white;
+    background-color: #0146b5;
     top: 0;
     left: 0;
     height: 56px;;
@@ -82,7 +82,7 @@
 
 .navbar_list a:hover,
 .navbar_list a:active {
-    color: cyan;
+    color: rgb(126, 129, 129);
 }
 
 .search_bar {

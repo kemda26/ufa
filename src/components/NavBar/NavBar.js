@@ -1,29 +1,60 @@
-import React from 'react'
-import './NavBar.css'
-import ToggleSideButton from '../SideNav/ToggleSideButton'
-import SearchBar from '../SearchBar/SearchBar'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import SignUp from '../SignUp/SignUpForm'
+import SignIn from '../SignIn/SignInForm'
+import SelectList from '../SelectList/SelectList'
+import User from '../User/Menu'
+import HomeIcon from '../HomeIcon/HomeIcon'
+import Department from '../Department/DepartmentMenu'
+import Officer from '../Officer/OfficerMenu'
+import Manager from '../Manager/Manager'
 
-const NavBar = (props) => {
-  return (
-    <header className='navbar'>
-      <nav className='navbar_nav'>
-        <div>
-            <ToggleSideButton click={props.toggleSideNavHandler} />
+const styles = {
+    root: {
+        flexGrow: 1,
+    },
+    grow: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20,
+    },
+};
+
+function NavBar(props) {
+    const { classes } = props;
+    return (
+        <div className={classes.root}>
+            <AppBar  position="static">
+                <Toolbar>
+                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                        <HomeIcon />
+                    </IconButton>
+                    <Typography variant="h6" color="inherit" className={classes.grow}>
+                        UFA
+                    </Typography>
+                    <Manager />
+                    <Officer />
+                    <Department />
+                    <User />
+                    <SignUp />
+                    <SignIn />
+                </Toolbar>
+            </AppBar>
         </div>
-        <div className='navbar_logo'><a href='/'>uFacilities</a></div>
-        <div className='spacer' />
-        <div className='search_bar'>
-            <input type='text' placeholder='Seach...'  />
-            <button type='submit'><i className="fa fa-search" ></i></button>
-        </div>
-        <div className='spacer' />
-        <div className='navbar_list'>
-            <button className='signup_btn' onClick={props.signUpFormHandle} >Sign Up</button>
-            <button className='signin_btn' onClick={props.signInFormHandle}>Sign In</button>
-        </div>
-      </nav>
-    </header>
-  )
+    );
 }
 
-export default NavBar
+NavBar.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(NavBar);
