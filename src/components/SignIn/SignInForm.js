@@ -26,9 +26,13 @@ export default class FormDialog extends React.Component {
     };
 
     handleLogin = () => {
-        axios.post(`http://localhost:9000/auth/login`, this.state.user)
+        axios.post(`http://localhost:9000/user/login`, this.state.user)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
+                // console.log(this.props)
+                this.props.loginHandler()
+                localStorage.setItem('token', res.data.token)
+                // this.setState({open: false})
             })
             .catch(e => {
                 console.log(e)

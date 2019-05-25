@@ -4,7 +4,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import {Link} from 'react-router-dom'
 
-function SimpleMenu() {
+function SimpleMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const style = {
         color: 'white'
@@ -15,7 +15,14 @@ function SimpleMenu() {
     }
 
     function handleClose() {
+        console.log(props)
         setAnchorEl(null);
+    }
+
+    const handleLogout = () => {
+        props.logoutHandler()   
+        setAnchorEl(null);
+
     }
 
     return (
@@ -30,7 +37,7 @@ function SimpleMenu() {
             <Menu  id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
                 <MenuItem component={Link} to='/user/profile' onClick={handleClose}>Profile</MenuItem>
                 <MenuItem component={Link} to='/user/fields' onClick={handleClose}>Concern Field</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout} component={Link} to='/'>Logout</MenuItem>
             </Menu>
         </div>
     );

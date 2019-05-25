@@ -4,12 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SignUp from '../SignUp/SignUpForm'
+// import MenuIcon from '@material-ui/icons/Menu';
+// import SignUp from '../SignUp/SignUpForm'
 import SignIn from '../SignIn/SignInForm'
-import SelectList from '../SelectList/SelectList'
 import User from '../User/Menu'
 import HomeIcon from '../Home/HomeIcon'
 import Department from '../Department/DepartmentMenu'
@@ -30,7 +29,19 @@ const styles = {
 };
 
 function NavBar(props) {
+    const [state, setState] = React.useState({
+        isLogin: false
+    })
     const { classes } = props;
+
+    const loginHandler = () => {
+        setState({isLogin: true})
+    }
+
+    const logoutHandler = () => {
+        setState({isLogin: false})
+    }
+
     return (
         <div className={classes.root}>
             <AppBar  position="static">
@@ -41,11 +52,19 @@ function NavBar(props) {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         UFA
                     </Typography>
-                    <Manager />
-                    <Department />
-                    <User />
-                    <SignUp />
-                    <SignIn />
+                    {state.isLogin ? (
+                        <React.Fragment>
+                            <Manager />
+                            <Department />
+                            <User logoutHandler={logoutHandler}/>
+                        </React.Fragment>
+                        ) : (
+                            <SignIn loginHandler={loginHandler}/>
+                        )
+                    }
+                   
+                    {/* <SignUp /> */}
+                    {/* <SignIn /> */}
                 </Toolbar>
             </AppBar>
         </div>

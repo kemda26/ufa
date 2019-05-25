@@ -33,7 +33,7 @@ export default function DepartmentTable() {
         let data = []
         axios.get('http://localhost:9000/users')
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 res.data.forEach(item => {
                     let {_id, ...rest} = item
                     let id = _id
@@ -44,10 +44,19 @@ export default function DepartmentTable() {
             .catch(e => {console.log(e)})
     }, [])
 
+    const token = localStorage.getItem('token')
+
     const addUser = (newUser) => {
-        axios.post('http://localhost:9000/user/add', {...newUser})
+        axios({
+            url: 'http://localhost:9000/user/add',
+            method: 'POST', 
+            data:{...newUser},
+            headers : {
+                'Authorization': 'Bearer ' + token,
+            }
+        })
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 let {_id, ...rest} = res.data
                 let id = _id.toString()
                 let newObj = {id, ...rest}
@@ -62,20 +71,34 @@ export default function DepartmentTable() {
 
     const editUser = (newUser) => {
         let {id, ...rest} = newUser
-        axios.patch(`http://localhost:9000/departments/${id}`, {id, ...rest})
+        axios({
+            url: `http://localhost:9000/user/edit/${id}`, 
+            method: 'POST', 
+            data: {id, ...rest}, 
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        })
             .then(res => {
-                console.log(res)
+                // console.log(res)
             })
             .catch(e => {
                 console.log(e)
             })
     }
 
-    const deleteUser = (user) => {
-        let {id} = data
-        axios.delete(`http://localhost:9000/departments/${id}`, id)
+    const deleteUser = (oldUser) => {
+        let {id} = oldUser
+        axios({
+            url: `http://localhost:9000/user/delete/${id}`,
+            method: 'delete',
+            data: id,
+            headers : {
+                'Authorization': 'Bearer ' + token,
+            }
+        })
             .then(res => {
-                console.log(res)
+                // console.log(res)
             })
             .catch(e => {
                 console.log(e)
@@ -96,14 +119,16 @@ export default function DepartmentTable() {
                     new Promise(resolve => {
                         setTimeout(() => {
                             resolve();
-                            const data = [...state.data];
-                            data.push(newData);
-                            setState({ ...state, data });
+                            // const data = [...state.data];
+                            // data.push(newData);
+                            // setState({ ...state, data });
+                            addUser(newData)
                         }, 600);
                     }),
 
                 onRowUpdate: (newData, oldData) =>
                     new Promise(resolve => {
+                        editUser(newData)
                         setTimeout(() => {
                             resolve();
                             const data = [...state.data];
@@ -119,6 +144,7 @@ export default function DepartmentTable() {
                             const data = [...state.data];
                             data.splice(data.indexOf(oldData), 1);
                             setState({ ...state, data });
+                            deleteUser(oldData)
                         }, 600);
                     }),
             }}
