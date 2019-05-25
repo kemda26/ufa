@@ -1,6 +1,5 @@
 import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { FormHelperText } from '@material-ui/core';
 
 function HomeIcon(props) {
     return (
@@ -19,7 +18,7 @@ const style = {
 function SvgIcons(props) {
     return (
         <div className='icon' style={style}>
-            <HomeIcon className='homeicon' style={{margin: '4px' ,fontSize: 30 }} />
+            <HomeIcon  className='homeicon' style={{margin: '4px' ,fontSize: 30 }} />
         </div>
     );
 }

@@ -11,10 +11,10 @@ import SignUp from '../SignUp/SignUpForm'
 import SignIn from '../SignIn/SignInForm'
 import SelectList from '../SelectList/SelectList'
 import User from '../User/Menu'
-import HomeIcon from '../HomeIcon/HomeIcon'
+import HomeIcon from '../Home/HomeIcon'
 import Department from '../Department/DepartmentMenu'
-import Officer from '../Officer/OfficerMenu'
 import Manager from '../Manager/Manager'
+import {Link} from 'react-router-dom'
 
 const styles = {
     root: {
@@ -35,14 +35,13 @@ function NavBar(props) {
         <div className={classes.root}>
             <AppBar  position="static">
                 <Toolbar>
-                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                    <IconButton component={Link} to='/' className={classes.menuButton} color="inherit" aria-label="Menu">
                         <HomeIcon />
                     </IconButton>
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         UFA
                     </Typography>
                     <Manager />
-                    <Officer />
                     <Department />
                     <User />
                     <SignUp />

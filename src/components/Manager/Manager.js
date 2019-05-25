@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
-import { MemoryRouter as Router } from 'react-router';
 
 function SimpleMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,11 +18,9 @@ function SimpleMenu() {
         setAnchorEl(null);
     }
 
-    const DepartmentLink = React.forwardRef((props, ref) => <Link innerRef={ref} {...props} />);
 
     return (
         <div>
-            <Router>
                 <Button style={style}
                     aria-owns={anchorEl ? 'simple-menu' : undefined}
                     aria-haspopup="true"
@@ -32,11 +29,10 @@ function SimpleMenu() {
                     Manager
                 </Button>
                 <Menu  id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-                    <MenuItem component={DepartmentLink} to='/manage/departments' onClick={handleClose}>Department</MenuItem>
-                    <MenuItem onClick={handleClose}>Account</MenuItem>
-                    <MenuItem onClick={handleClose}>Research</MenuItem>
+                    <MenuItem component={Link} to='/manage/departments' onClick={handleClose}>Department</MenuItem>
+                    <MenuItem component={Link} to='/manage/users' onClick={handleClose}>Account</MenuItem>
+                    <MenuItem component={Link} to='/manage/researches' onClick={handleClose}>Research</MenuItem>
                 </Menu>
-            </Router>
         </div>
     );
 }

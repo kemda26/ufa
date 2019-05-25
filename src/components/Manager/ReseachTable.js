@@ -21,7 +21,7 @@ function CheckboxesGroup() {
     // const error = [gilad, jason, antoine].filter(v => v).length !== 2;
 
     return (
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', justifyContent:'center', margin: '10px 0 0 0'}}>
             <FormControl component="fieldset" style={{ margin: '1px' }}>
                 <FormLabel component="legend">Assign responsibility</FormLabel>
                 <FormGroup>
