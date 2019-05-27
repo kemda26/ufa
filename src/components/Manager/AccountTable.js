@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import MaterialTable from 'material-table';
+
 const axios = require('axios')
+const style = {
+        margin: '10px',
+}
 
 export default function DepartmentTable() {
     const [state, setState] = React.useState({
@@ -114,6 +118,7 @@ export default function DepartmentTable() {
 
 
     return (
+    <div style={style}>
         <MaterialTable
             title="Quản lý giảng viên"
             columns={state.columns}
@@ -156,5 +161,6 @@ export default function DepartmentTable() {
                     }),
             }}
         />
+    </div>
     );
 }

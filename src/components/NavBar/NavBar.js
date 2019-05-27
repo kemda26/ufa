@@ -15,6 +15,7 @@ import Department from '../Department/DepartmentMenu'
 import Manager from '../Manager/Manager'
 import {Link} from 'react-router-dom'
 import Teachers from '../Teacher/Teacher'
+import Avatar from '@material-ui/core/Avatar';
 
 const styles = {
     root: {
@@ -28,6 +29,10 @@ const styles = {
         marginRight: 20,
     },
 };
+
+const style = {
+        background: '#005e94',
+}
 
 function NavBar(props) {
     const [state, setState] = React.useState({
@@ -46,13 +51,13 @@ function NavBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar  position="static">
+            <AppBar style={style} position="static">
                 <Toolbar>
                     <IconButton component={Link} to='/' className={classes.menuButton} color="inherit" aria-label="Menu">
-                        <HomeIcon />
+                        <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Ivd-mj3CYUN1hX7B3waACsdHRe0NgyP9qtyyNCZkdJmmhfzS" className={classes.bigAvatar} />
                     </IconButton>
                     <Typography variant="h6" color="inherit" className={classes.grow}>
-                        UFA
+                        UFACILITIES
                     </Typography>
                     {(state.isLogin || token)? (
                         <React.Fragment>
