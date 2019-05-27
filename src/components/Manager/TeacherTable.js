@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import MaterialTable, { MTableCell } from 'material-table';
 import { Link } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import ReadonlyTeacherProfile from './TeacherProfile'
+
 const axios = require('axios')
 
 export default function TeacherTable() {
     const [state, setState] = React.useState({
         columns: [  
-            { title: 'Name', field: 'name' , render: rowData => <a href='localhost:3000/teacher/'>{rowData.name}</a>},
+            { title: 'Name', field: 'name' },
             { title: 'Type', field: 'type', lookup: {2:'Teacher'}},
             { title: 'Email', field: 'email' },
             { title: 'Phone', field: 'phone' },
@@ -16,8 +19,8 @@ export default function TeacherTable() {
         ],
         data: [
             {
-                id: '',
-                name: 'a',
+                id: '111111111',
+                name: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',
                 type: 2,
                 email: '@email',
                 phone: '321313',
@@ -28,20 +31,20 @@ export default function TeacherTable() {
         ],
     });
 
-    // useEffect(() => {
-    //     let data = []
-    //     axios.get('http://localhost:9000/')
-    //         .then(res => {
-    //             // console.log(res.data)
-    //             res.data.forEach(item => {
-    //                 let {_id, ...rest} = item
-    //                 let id = _id
-    //                 data.push({id, ...rest})
-    //                 setState({...state, data})
-    //             })
-    //         })
-    //         .catch(e => {console.log(e)})
-    // }, [])
+    useEffect(() => {
+        let data = []
+        axios.get('http://localhost:9000/')
+            .then(res => {
+                // console.log(res.data)
+                res.data.forEach(item => {
+                    let {_id, ...rest} = item
+                    let id = _id
+                    data.push({id, ...rest})
+                    setState({...state, data})
+                })
+            })
+            .catch(e => {console.log(e)})
+    }, [])
 
     const token = localStorage.getItem('token')
 
@@ -107,6 +110,13 @@ export default function TeacherTable() {
                         }, 600);
                     }),
             }}
+            detailPanel={rowData => {
+                const {id} = rowData
+                return (
+                    <ReadonlyTeacherProfile profileID={id}/>
+                )
+            }}
+            onRowClick={(event, rowData, togglePanel) => togglePanel()}
         />
     );
 }

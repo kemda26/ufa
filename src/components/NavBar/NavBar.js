@@ -14,6 +14,7 @@ import HomeIcon from '../Home/HomeIcon'
 import Department from '../Department/DepartmentMenu'
 import Manager from '../Manager/Manager'
 import {Link} from 'react-router-dom'
+import Teachers from '../Teacher/Teacher'
 
 const styles = {
     root: {
@@ -60,8 +61,10 @@ function NavBar(props) {
                             <User logoutHandler={logoutHandler}/>
                         </React.Fragment>
                         ) : (
-                            
+                        <React.Fragment>
+                            <Teachers />
                             <SignIn loginHandler={loginHandler}/>
+                        </React.Fragment>
                         )
                     }
                    

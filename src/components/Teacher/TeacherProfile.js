@@ -59,7 +59,7 @@ const degrees = [
     }
 ]
 
-function TextFields() {
+function TextFields(props) {
     const [values, setValues] = React.useState({
         name: '',
         address: '',
@@ -73,8 +73,10 @@ function TextFields() {
     });
 
     useEffect(() => {
-        let id = localStorage.getItem('profileID')
+        // let id = localStorage.getItem('profileID')
         // console.log(id)
+        const id = props.profileID
+        console.log(props)
         axios.get(`http://localhost:9000/teacher/${id}`, id)
             .then(res => {
                 // console.log(res.data)
