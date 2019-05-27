@@ -5,26 +5,27 @@ const axios = require('axios')
 export default function DepartmentTable() {
     const [state, setState] = React.useState({
         columns: [  
-            { title: 'Number', field: 'number'},
+            // { title: 'Number', field: 'number'},
             { title: 'Name', field: 'name' },
             { title: 'Username', field: 'username' },
             { title: 'Password', field: 'password' },
             { title: 'Type', field: 'type', lookup: {1:'Admin', 2:'Teacher'}},
             { title: 'Email', field: 'email' },
-            { title: 'Degree', field: 'degree', lookup: {3:'PhD', 4:'Bachelor'}},
-            { title: 'Department', field: 'department'}
+            { title: 'Phone', field: 'phone' },
+            // { title: 'Degree', field: 'degree', lookup: {3:'PhD', 4:'Bachelor'}},
+            // { title: 'Department', field: 'department'}
         ],
         data: [
             {
-                id: '1',
-                number: '1',
-                name: 'Quang',
-                username: 'quangnd',
-                password: 'abcxyz',
-                email: 'ufa@gmail.com',
-                type: 2,
-                degree: 3,
-                department: 'ufa'
+                // id: '1',
+                // number: '1',
+                // name: 'Quang',
+                // username: 'quangnd',
+                // password: 'abcxyz',
+                // email: 'ufa@gmail.com',
+                // type: 2,
+                // degree: 3,
+                // department: 'ufa'
             },
         ],
     });
@@ -35,9 +36,9 @@ export default function DepartmentTable() {
             .then(res => {
                 // console.log(res.data)
                 res.data.forEach(item => {
-                    let {_id, ...rest} = item
+                    let {_id, profile, ...rest} = item
                     let id = _id
-                    data.push({id, ...rest})
+                    data.push({id, ...rest, ...profile})
                     setState({...state, data})
                 })
             })
@@ -48,7 +49,7 @@ export default function DepartmentTable() {
 
     const addUser = (newUser) => {
         axios({
-            url: 'http://localhost:9000/user/add',
+            url: 'http://localhost:9000/manage/user/add',
             method: 'POST', 
             data:{...newUser},
             headers : {
@@ -57,9 +58,10 @@ export default function DepartmentTable() {
         })
             .then(res => {
                 // console.log(res)
-                let {_id, ...rest} = res.data
+                let {_id} = res.data
+                // let {name, email, phone} = profile
                 let id = _id.toString()
-                let newObj = {id, ...rest}
+                let newObj = {id, ...newUser}
                 const data = [...state.data]
                 data.push(newObj)
                 setState({...state, data})
@@ -69,18 +71,20 @@ export default function DepartmentTable() {
             })
     }
 
-    const editUser = (newUser) => {
-        let {id, ...rest} = newUser
+    const editUser = (newUser, oldUser) => {
+        let {id} = newUser
         axios({
-            url: `http://localhost:9000/user/edit/${id}`, 
+            url: `http://localhost:9000/manage/user/edit/${id}`, 
             method: 'POST', 
-            data: {id, ...rest}, 
+            data: {...newUser}, 
             headers: {
                 'Authorization': 'Bearer ' + token,
             }
         })
             .then(res => {
-                // console.log(res)
+                const data = [...state.data];
+                data[data.indexOf(oldUser)] = newUser
+                setState({ ...state, data });
             })
             .catch(e => {
                 console.log(e)
@@ -90,7 +94,7 @@ export default function DepartmentTable() {
     const deleteUser = (oldUser) => {
         let {id} = oldUser
         axios({
-            url: `http://localhost:9000/user/delete/${id}`,
+            url: `http://localhost:9000/manage/user/delete/${id}`,
             method: 'delete',
             data: id,
             headers : {
@@ -98,6 +102,9 @@ export default function DepartmentTable() {
             }
         })
             .then(res => {
+                const data = [...state.data];
+                data.splice(data.indexOf(oldUser), 1);
+                setState({ ...state, data });
                 // console.log(res)
             })
             .catch(e => {
@@ -128,12 +135,12 @@ export default function DepartmentTable() {
 
                 onRowUpdate: (newData, oldData) =>
                     new Promise(resolve => {
-                        editUser(newData)
                         setTimeout(() => {
                             resolve();
-                            const data = [...state.data];
-                            data[data.indexOf(oldData)] = newData;
-                            setState({ ...state, data });
+                            // const data = [...state.data];
+                            // data[data.indexOf(oldData)] = newData;
+                            // setState({ ...state, data });
+                            editUser(newData, oldData)
                         }, 600);
                     }),
 
@@ -141,9 +148,9 @@ export default function DepartmentTable() {
                     new Promise(resolve => {
                         setTimeout(() => {
                             resolve();
-                            const data = [...state.data];
-                            data.splice(data.indexOf(oldData), 1);
-                            setState({ ...state, data });
+                            // const data = [...state.data];
+                            // data.splice(data.indexOf(oldData), 1);
+                            // setState({ ...state, data });
                             deleteUser(oldData)
                         }, 600);
                     }),

@@ -27,7 +27,7 @@ function SimpleMenu() {
                 Department
       </Button>
             <Menu  id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-                <MenuItem onClick={handleClose}>1</MenuItem>
+                <MenuItem onClick={handleClose}>Teachers</MenuItem>
                 <MenuItem onClick={handleClose}>2</MenuItem>
                 <MenuItem onClick={handleClose}>3</MenuItem>
             </Menu>

@@ -32,6 +32,7 @@ function NavBar(props) {
     const [state, setState] = React.useState({
         isLogin: false
     })
+    const token = localStorage.getItem('token')
     const { classes } = props;
 
     const loginHandler = () => {
@@ -52,13 +53,14 @@ function NavBar(props) {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         UFA
                     </Typography>
-                    {state.isLogin ? (
+                    {(state.isLogin || token)? (
                         <React.Fragment>
                             <Manager />
                             <Department />
                             <User logoutHandler={logoutHandler}/>
                         </React.Fragment>
                         ) : (
+                            
                             <SignIn loginHandler={loginHandler}/>
                         )
                     }

@@ -32,6 +32,7 @@ export default class FormDialog extends React.Component {
                 // console.log(this.props)
                 this.props.loginHandler()
                 localStorage.setItem('token', res.data.token)
+                localStorage.setItem('profileID', res.data.profile)
                 // this.setState({open: false})
             })
             .catch(e => {

@@ -6,6 +6,8 @@ import AccountTable from './components/Manager/AccountTable'
 import FieldCheckbox from './components/Manager/ReseachTable'
 import UserProfile from './components/User/Profile'
 import Home from './components/Home/Home'
+import TeacherTable from './components/Manager/TeacherTable'
+import TeacherProfile from './components/User/TeacherProfile'
 
 export class App extends Component {
     state = {
@@ -23,10 +25,12 @@ export class App extends Component {
                         <Route path="/" exact component={Home}/>
                         <Route path="/manage/departments" component={DepartmentTable}/>
                         <Route path="/manage/users" component={AccountTable}/>
-                        {/* <Route path="/manage/researches" component={ResearchTable}/> */}
+                        <Route path="/manage/teachers" component={TeacherTable}/>
                         <Route path='/user/profile' component={UserProfile}/>
                         <Route path='/user/fields' component={FieldCheckbox}/>
+                        {/* <Route path='/teacher/:id' component={TeacherProfile}/> */}
                     </Switch>
+                    <TeacherProfile/>
                 </div>
             </BrowserRouter>
         )

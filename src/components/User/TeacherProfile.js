@@ -85,21 +85,21 @@ function TextFields() {
             })
     }, [])
 
-    const handleSubmit = () => {
-        let id = localStorage.getItem('profileID')
-        const data = {...values}
-        axios.post(`http://localhost:9000/teacher/${id}`, data)
-            .then(res => {
-                console.log(res)
-            })
-            .catch(e => {
-                console.log(e)
-            })
-    }
+    // const handleSubmit = () => {
+    //     let id = localStorage.getItem('profileID')
+    //     const data = {...values}
+    //     axios.post(`http://localhost:9000/teacher/${id}`, data)
+    //         .then(res => {
+    //             console.log(res)
+    //         })
+    //         .catch(e => {
+    //             console.log(e)
+    //         })
+    // }
 
-    const handleChange = name => event => {
-        setValues({ ...values, [name]: event.target.value });
-    };
+    // const handleChange = name => event => {
+    //     setValues({ ...values, [name]: event.target.value });
+    // };
 
     return (
         <form style={styles.container} noValidate autoComplete="off">
@@ -111,32 +111,44 @@ function TextFields() {
                 label="Name"
                 style={styles.textField}
                 value={values.name}
-                onChange={handleChange('name')}
+                // onChange={handleChange('name')}
                 margin="normal"
+                InputProps={{
+                    readOnly: true,
+                }}
             />
             <TextField 
                 id='standard-email'
                 label='Email'
                 style={styles.textField}
                 value={values.email}
-                onChange={handleChange('email')}
+                // onChange={handleChange('email')}
                 margin='normal'
+                InputProps={{
+                    readOnly: true,
+                }}
             />
             <TextField 
                 id='standard-phone'
                 label='phone'
                 style={styles.textField}
                 value={values.phone}
-                onChange={handleChange('phone')}
+                // onChange={handleChange('phone')}
                 margin='normal'
+                InputProps={{
+                    readOnly: true,
+                }}
             />
             <TextField
                 id="standard-address"
                 label="Address"
                 style={styles.textField}
                 value={values.address}
-                onChange={handleChange('address')}
+                // onChange={handleChange('address')}
                 margin="normal"
+                InputProps={{
+                    readOnly: true,
+                }}
             />
             {/* <TextField
                 id="standard-read-only-input"
@@ -154,11 +166,14 @@ function TextFields() {
                 label="Degree"
                 style={styles.textField}
                 value={values.degree}
-                onChange={handleChange('degree')}
+                // onChange={handleChange('degree')}
                 SelectProps={{
                     MenuProps: {
                         style: styles.menu,
                     },
+                }}
+                InputProps={{
+                    readOnly: true,
                 }}
                 helperText="Select degree"
                 margin="normal"
@@ -175,11 +190,14 @@ function TextFields() {
                 label="Department"
                 style={styles.textField}
                 value={values.department}
-                onChange={handleChange('department')}
+                // onChange={handleChange('department')}
                 SelectProps={{
                     MenuProps: {
                         style: styles.menu,
                     },
+                }}
+                InputProps={{
+                    readOnly: true,
                 }}
                 helperText="Select department"
                 margin="normal"
@@ -194,15 +212,15 @@ function TextFields() {
                 id="standard-multiline-static"
                 label="Description"
                 value={values.description}
-                onChange={handleChange('description')}
+                // onChange={handleChange('description')}
                 multiline
                 rows="4"
                 style={styles.textField}
+                InputProps={{
+                    readOnly: true,
+                }}
                 margin="normal"
             />
-            <Button onClick={handleSubmit} variant="contained" size="medium" color="primary" style={styles.button}>
-                Update
-            </Button>
         </form>
     );
 }

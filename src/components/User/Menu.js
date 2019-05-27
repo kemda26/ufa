@@ -20,9 +20,10 @@ function SimpleMenu(props) {
     }
 
     const handleLogout = () => {
-        props.logoutHandler()   
+        props.logoutHandler()
+        localStorage.removeItem('token')
+        localStorage.removeItem('profileID')
         setAnchorEl(null);
-
     }
 
     return (
