@@ -11,18 +11,12 @@ const styles = {
     container: {
         display: 'flex',
         flexWrap: 'wrap',
-        // flexDiretion: 'column'
         width: '700px',
     },
     textField: {
         marginLeft: '4px',
         marginRight: '4px',
         width: 200,
-    },
-    phone: {
-        marginLeft: '4px',
-        marginRight: '4px',
-        width: 130,
     },
     dense: {
         marginTop: 200,
@@ -154,7 +148,7 @@ function TextFields() {
     return (
         <div style={{width: '900px', margin: '10px auto',display: 'flex',flexDirection: 'row',
                     boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 3px 1px -2px rgba(0,0,0,0.12)'}}>
-            <Grid container style={{width: '25%'}} justify="flex-start" alignItems="center">
+            <Grid container style={{width: '25%'}} justify="center" alignItems="center">
                 <Avatar alt="avatars" src={values.avatar} style={styles.avatar} />
             </Grid>
             <form style={styles.container} noValidate autoComplete="off">
@@ -243,6 +237,8 @@ function TextFields() {
                     label="Lĩnh vực nghiên cứu"
                     style={styles.textField}
                     value={values.field}
+                    multiline
+                    rows="2"
                     onChange={handleChange('field')}
                     margin="normal"
                 />
