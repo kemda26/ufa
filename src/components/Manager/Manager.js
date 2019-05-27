@@ -31,7 +31,7 @@ function SimpleMenu() {
             <Menu  id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
                 <MenuItem component={Link} to='/manage/departments' onClick={handleClose}>Department</MenuItem>
                 <MenuItem component={Link} to='/manage/users' onClick={handleClose}>Account</MenuItem>
-                <MenuItem component={Link} to='/manage/teachers' onClick={handleClose}>Teacher</MenuItem>
+                {/* <MenuItem component={Link} to='/manage/teachers' onClick={handleClose}>Teacher</MenuItem> */}
                 <MenuItem component={Link} to='/manage/researches' onClick={handleClose}>Research</MenuItem>
             </Menu>
         </div>

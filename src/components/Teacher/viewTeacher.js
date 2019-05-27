@@ -8,26 +8,37 @@ const axios = require('axios')
 
 export default function TeacherTable() {
     const [state, setState] = React.useState({
-        columns: [  
-            { title: 'Name', field: 'name' },
-            { title: 'Type', field: 'type', lookup: {2:'Teacher'}},
+        columns: [ 
+            { title: 'Họ tên', field: 'name' },
+            { title: 'Học hàm, Học vị', field: 'degree', lookup: {1:'ThS.', 2:'TS.', 3:'PGS.TS.', 4:'GS.TS.', 5:'CN.'}},
             { title: 'Email', field: 'email' },
-            { title: 'Phone', field: 'phone' },
-            { title: 'Degree', field: 'degree', lookup: {3:'PhD', 4:'Bachelor'}},
-            { title: 'Address', field: 'address'},
-            { title: 'Department', field: 'department'}
+            { title: 'Đơn vị', field: 'department', lookup: {
+                1:'BM Các Hệ thống Thông tin',
+                2:'BM Công nghệ Phần mềm',
+                3:'BM Khoa học Máy tính',
+                4:'BM Khoa học và Kỹ thuật tính toán',
+                5:'BM Truyền thông và Mạng máy tính',
+                6:'PTN An toàn thông tin',
+                7:'PTN Hệ thống Nhúng',
+                8:'PTN Tương tác Người – Máy',
+            }},
+            {title: 'Lĩnh vực nghiên cứu', field: 'field'},
+            // { title: 'Type', field: 'type', lookup: {2:'Teacher'}},
+            // { title: 'Phone', field: 'phone' },
+            
         ],
         data: [
-            {
-                id: '111111111',
-                name: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-                type: 2,
-                email: '@email',
-                phone: '321313',
-                address: 'E3',
-                degree: 3,
-                department: 'aa',
-            },
+            // {
+            //     id: '111111111',
+            //     name: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+            //     type: 2,
+            //     email: '@email',
+            //     phone: '321313',
+            //     address: 'E3',
+            //     degree: 3,
+            //     department: 'aa',
+            //     field: 'aaaaa',
+            // },
         ],
     });
 
@@ -45,28 +56,6 @@ export default function TeacherTable() {
             })
             .catch(e => {console.log(e)})
     }, [])
-
-    // const token = localStorage.getItem('token')
-
-    // const editUser = (newUser, oldUser) => {
-    //     let {id, ...rest} = newUser
-    //     axios({
-    //         url: `http://localhost:9000/user/edit/${id}`,
-    //         method: 'POST', 
-    //         data: {id, ...rest}, 
-    //         headers: {
-    //             'Authorization': 'Bearer ' + token,
-    //         }
-    //     })
-    //         .then(res => {
-    //             const data = [...state.data];
-    //             data[data.indexOf(oldUser)] = newUser
-    //             setState({ ...state, data });
-    //         })
-    //         .catch(e => {
-    //             console.log(e)
-    //         })
-    // }
 
     return (
         <MaterialTable

@@ -35,27 +35,59 @@ const styles = {
 
 const departments = [
     {
-        value: 'computer science',
-        label: 'Computer Science',
+        value: '1',
+        label: 'BM Các Hệ thống Thông tin',
     },
     {
-        value: 'network',
-        label: 'Network',
+        value: '2',
+        label: 'BM Công nghệ Phần mềm'
+    },
+    {
+        value: '3',
+        label: 'BM Khoa học Máy tính'
+    },
+    {
+        value: '4',
+        label: 'BM Khoa học và Kỹ thuật tính toán'
+    },
+    {
+        value: '5',
+        label: 'BM Truyền thông và Mạng máy tính'
+    },
+    {
+        value: '6',
+        label: 'PTN An toàn thông tin'
+    },
+    {
+        value: '7',
+        label: 'PTN Hệ thống Nhúng'
+    },
+    {
+        value: '8',
+        label: 'PTN Tương tác Người – Máy'
     }
 ]
 
 const degrees = [
     {
-        value: 'phd',
-        label: 'PhD',
+        value: '1',
+        label: 'ThS.',
     },
     {
-        value: 'bachelor',
-        label: 'Bachelor',
+        value: '2',
+        label: 'TS.',
     },
     {
-        value: 'master',
-        label: 'Master',
+        value: '3',
+        label: 'PGS.TS.',
+    },
+    {
+        value: '4',
+        label: 'GS.TS.'
+    },
+    {
+        value: '5',
+        label: 'CN.'
     }
 ]
 
@@ -70,6 +102,7 @@ function TextFields() {
         avatar: '',
         department: '',
         phone: '',
+        field: '',
     });
 
     useEffect(() => {
@@ -108,7 +141,7 @@ function TextFields() {
             </Grid>
             <TextField
                 id="standard-name"
-                label="Name"
+                label="Họ tên"
                 style={styles.textField}
                 value={values.name}
                 onChange={handleChange('name')}
@@ -124,34 +157,32 @@ function TextFields() {
             />
             <TextField 
                 id='standard-phone'
-                label='phone'
+                label='Điện thoại'
                 style={styles.textField}
                 value={values.phone}
                 onChange={handleChange('phone')}
                 margin='normal'
             />
+            <TextField 
+                id='standard-website'
+                label='Website'
+                style={styles.textField}
+                value={values.website}
+                onChange={handleChange('website')}
+                margin='normal'
+            />
             <TextField
                 id="standard-address"
-                label="Address"
+                label="Địa chỉ"
                 style={styles.textField}
                 value={values.address}
                 onChange={handleChange('address')}
                 margin="normal"
             />
-            {/* <TextField
-                id="standard-read-only-input"
-                label="Read Only"
-                defaultValue="Hello World"
-                style={styles.textField}
-                margin="normal"
-                InputProps={{
-                    readOnly: true,
-                }}
-            /> */}
             <TextField
                 id="standard-select-degree"
                 select
-                label="Degree"
+                label="Học hàm, Học vị"
                 style={styles.textField}
                 value={values.degree}
                 onChange={handleChange('degree')}
@@ -172,7 +203,7 @@ function TextFields() {
             <TextField
                 id="standard-select-department"
                 select
-                label="Department"
+                label="Đơn vị"
                 style={styles.textField}
                 value={values.department}
                 onChange={handleChange('department')}
@@ -191,8 +222,16 @@ function TextFields() {
                 ))}
             </TextField>
             <TextField
+                id="standard-field"
+                label="Lĩnh vực nghiên cứu"
+                style={styles.textField}
+                value={values.field}
+                onChange={handleChange('field')}
+                margin="normal"
+            />
+            <TextField
                 id="standard-multiline-static"
-                label="Description"
+                label="Mô tả"
                 value={values.description}
                 onChange={handleChange('description')}
                 multiline
@@ -201,7 +240,7 @@ function TextFields() {
                 margin="normal"
             />
             <Button onClick={handleSubmit} variant="contained" size="medium" color="primary" style={styles.button}>
-                Update
+                Cập nhật
             </Button>
         </form>
     );

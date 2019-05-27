@@ -5,10 +5,10 @@ const axios = require('axios')
 export default function DepartmentTable() {
     const [state, setState] = React.useState({
         columns: [  
-            { title: 'Department', field: 'name' },
-            { title: 'Type', field: 'type' },
-            { title: 'Address', field: 'address'},
-            { title: 'Phone', field: 'phone'},
+            { title: 'Tên đơn vị', field: 'name' },
+            { title: 'Loại đơn vị', field: 'type' },
+            { title: 'Địa chỉ', field: 'address'},
+            { title: 'Điện thoại', field: 'phone'},
             { title: 'Website', field: 'website'}
         ],
         data: [],
@@ -68,7 +68,7 @@ export default function DepartmentTable() {
 
     return (
         <MaterialTable
-            title="Manage Department"
+            title="Quản lý đơn vị"
             columns={state.columns}
             data={state.data}
             options={{

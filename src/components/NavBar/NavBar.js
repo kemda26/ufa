@@ -57,6 +57,7 @@ function NavBar(props) {
                     {(state.isLogin || token)? (
                         <React.Fragment>
                             <Manager />
+                            <Teachers />
                             <Department />
                             <User logoutHandler={logoutHandler}/>
                         </React.Fragment>
@@ -67,7 +68,6 @@ function NavBar(props) {
                         </React.Fragment>
                         )
                     }
-                   
                     {/* <SignUp /> */}
                     {/* <SignIn /> */}
                 </Toolbar>

@@ -6,12 +6,12 @@ export default function DepartmentTable() {
     const [state, setState] = React.useState({
         columns: [  
             // { title: 'Number', field: 'number'},
-            { title: 'Name', field: 'name' },
-            { title: 'Username', field: 'username' },
-            { title: 'Password', field: 'password' },
-            { title: 'Type', field: 'type', lookup: {1:'Admin', 2:'Teacher'}},
+            { title: 'Tên', field: 'name' },
+            { title: 'Tài khoản', field: 'username' },
+            { title: 'Mật khẩu', field: 'password' },
+            { title: 'Loại tài khoản', field: 'type', lookup: {1:'Quản trị viên', 2:'Giảng viên'}},
             { title: 'Email', field: 'email' },
-            { title: 'Phone', field: 'phone' },
+            { title: 'Điện thoại', field: 'phone' },
             // { title: 'Degree', field: 'degree', lookup: {3:'PhD', 4:'Bachelor'}},
             // { title: 'Department', field: 'department'}
         ],
@@ -115,7 +115,7 @@ export default function DepartmentTable() {
 
     return (
         <MaterialTable
-            title="Manage Account"
+            title="Quản lý giảng viên"
             columns={state.columns}
             data={state.data}
             options={{
