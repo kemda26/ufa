@@ -9,6 +9,7 @@ import Home from './components/Home/Home'
 import viewTeacherTable from './components/Teacher/viewTeacher'
 import editTeacherTable from './components/Manager/TeacherTable'
 import viewDepartmentTable from './components/Department/viewDepartment'
+// import Footer from './components/Footer/Footer'
 
 export class App extends Component {
     state = {
@@ -32,6 +33,7 @@ export class App extends Component {
                         {/* <Route path='/teacher/:id' component={TeacherProfile}/> */}
                     </Switch>
                     {/* <TeacherProfile/> */}
+                   
                 </div>
             </BrowserRouter>
         )

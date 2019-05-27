@@ -5,7 +5,9 @@ import { Button } from '@material-ui/core';
 import ReadonlyTeacherProfile from './TeacherProfile'
 
 const axios = require('axios')
-
+const style = {
+        margin: '10px',
+}
 export default function TeacherTable() {
     const [state, setState] = React.useState({
         columns: [ 
@@ -58,6 +60,7 @@ export default function TeacherTable() {
     }, [])
 
     return (
+    <div style={style}>    
         <MaterialTable
             title="Teachers"
             columns={state.columns}
@@ -73,5 +76,6 @@ export default function TeacherTable() {
             }}
             onRowClick={(event, rowData, togglePanel) => togglePanel()}
         />
+    </div>
     );
 }
