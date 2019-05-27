@@ -8,6 +8,7 @@ import UserProfile from './components/User/Profile'
 import Home from './components/Home/Home'
 import viewTeacherTable from './components/Teacher/viewTeacher'
 import editTeacherTable from './components/Manager/TeacherTable'
+import viewDepartmentTable from './components/Department/viewDepartment'
 
 export class App extends Component {
     state = {
@@ -27,6 +28,7 @@ export class App extends Component {
                         <Route path='/user/profile' component={UserProfile}/>
                         <Route path='/user/fields' component={FieldCheckbox}/>
                         <Route path='/teachers' component={viewTeacherTable}/>
+                        <Route path='/departments' component={viewDepartmentTable}/>
                         {/* <Route path='/teacher/:id' component={TeacherProfile}/> */}
                     </Switch>
                     {/* <TeacherProfile/> */}
