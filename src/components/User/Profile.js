@@ -210,7 +210,6 @@ function TextFields() {
                             style: styles.menu,
                         },
                     }}
-                    // helperText="Select degree"
                     margin="normal"
                 >
                     {degrees.map(option => (
@@ -231,7 +230,6 @@ function TextFields() {
                             style: styles.menu,
                         },
                     }}
-                    // helperText="Select department"
                     margin="normal"
                 >
                     {departments.map(option => (
