@@ -1,32 +1,35 @@
-// import React from 'react';
+import React from 'react';
 
-// const footerStyle = {
-//   backgroundColor: "#005e94",
-//   fontSize: "14px",
-//   color: "white",
-//   borderTop: "1px solid #005e94",
-//   textAlign: "center",
-//   padding: "10px",
-//   position: "fixed",
-//   left: "0",
-//   bottom: "0",
-//   height: "43px",
-//   width: "100%"
-// };
+const footerStyle = {
+  backgroundColor: '#005e94',
+  fontSize: '12px',
+  color: 'white',
+  borderTop: '1px solid #005e94',
+  textAlign: 'center',
+  padding: '10px',
+  paddingTop: '6px',
+  position: 'fixed',
+  left: '0',
+  bottom: '0',
+  height: '46px',
+  width: '100%'
+}
 
-// const phantomStyle = {
-//   display: "block",
-//   padding: "0px",
-//   height: "50px",
-//   width: "100%"
-// };
+const txt = {
+	padding: '5px',
+}
 
-// function Footer() {
-//   return (
-//     <div>
-//       <div>voanh | uet.vnu.edu.vn@gmail.com | 123 456</div>
-//       <div>-</div>
-//       <div> © 2019 CopyRight. All Rights Reserved. </div>
-//     </div>
-//   );
-// }
+
+export default function Footer() {
+  return (
+    <div style={footerStyle}>
+    <div style={txt}>
+    	Khoa Công Nghệ Thông Tin - Trường Đại học Công Nghệ - ĐHQGHN 
+    </div>
+
+	<div style={txt}>
+    	  Phòng 301 – Nhà E3 144 – Xuân Thủy, Cầu Giấy, Hà Nội. Điện thoại: (024)37547064. Fax: (024)37547460. Email: fit@vnu.edu.vn.
+    </div>
+    </div>
+  );
+}
