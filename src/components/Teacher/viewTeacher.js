@@ -74,7 +74,8 @@ export default function TeacherTable() {
                 grouping: true,
                 headerStyle: {
                 backgroundColor: '#005e94',
-                color: '#FFF'
+                color: '#FFF',
+                fontSize: '15px'
                 }
             }}
             detailPanel={rowData => {
