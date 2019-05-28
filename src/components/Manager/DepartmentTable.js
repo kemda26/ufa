@@ -14,7 +14,7 @@ export default function DepartmentTable() {
     const [state, setState] = React.useState({
         columns: [  
             { title: 'Tên đơn vị', field: 'name' },
-            { title: 'Loại đơn vị', field: 'type' },
+            { title: 'Loại đơn vị', field: 'type', lookup: {1: 'Bộ môn', 2: 'Phòng thí nghiệm'}},
             { title: 'Địa chỉ', field: 'address'},
             { title: 'Điện thoại', field: 'phone'},
             { title: 'Website', field: 'website'}

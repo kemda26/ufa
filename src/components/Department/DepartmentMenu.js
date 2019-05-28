@@ -2,6 +2,8 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Link } from 'react-router-dom';
+
 
 function SimpleMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -27,9 +29,7 @@ function SimpleMenu() {
                 Department
       </Button>
             <Menu  id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-                <MenuItem onClick={handleClose}>Teachers</MenuItem>
-                <MenuItem onClick={handleClose}>2</MenuItem>
-                <MenuItem onClick={handleClose}>3</MenuItem>
+                <MenuItem component={Link} to='/departments' onClick={handleClose}>Xem</MenuItem>
             </Menu>
         </div>
     );

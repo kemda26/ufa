@@ -11,25 +11,41 @@ const styles = {
     container: {
         display: 'flex',
         flexWrap: 'wrap',
+        width: '1000px',
     },
     textField: {
         marginLeft: '4px',
         marginRight: '4px',
-        width: 200,
+        width: 220,
     },
     dense: {
         marginTop: 200,
     },
     menu: {
-        width: 200,
+        width: 'auto',
+    },
+    field:{
+        marginLeft: '4px',
+        marginRight: '4px',
+        width: 426,
+    },
+    longText: {
+        marginLeft: '4px',
+        marginRight: '4px',
+        width: 448,
+    },
+    description: {
+        marginLeft: '4px',
+        marginRight: '4px',
+        width: 426,
     },
     button: {
         margin: '2px',
     },
     avatar: {
         margin: 30,
-        width: '15rem',
-        height: '15rem',
+        width: '10rem',
+        height: '10rem',
     },
 }
 
@@ -106,13 +122,10 @@ function TextFields(props) {
     });
 
     useEffect(() => {
-        // let id = localStorage.getItem('profileID')
-        // console.log(id)
         const id = props.profileID
         console.log(props)
         axios.get(`http://localhost:9000/teacher/${id}`, id)
             .then(res => {
-                // console.log(res.data)
                 setValues({...values, ...res.data})
             })
             .catch(e => {
@@ -121,140 +134,132 @@ function TextFields(props) {
     }, [])
 
     return (
-        <form style={styles.container} noValidate autoComplete="off">
-            <Grid container justify="center" alignItems="center">
+        <div style={{width: '83%', margin: '10px auto',display: 'flex',flexDirection: 'row',
+                    boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 3px 1px -2px rgba(0,0,0,0.12)'}}>
+            <Grid container style={{width: '25%'}} justify="center" alignItems="center">
                 <Avatar alt="avatars" src={values.avatar} style={styles.avatar} />
             </Grid>
-            <TextField
-                id="standard-name"
-                label="Họ tên"
-                style={styles.textField}
-                value={values.name}
-                // onChange={handleChange('name')}
-                margin="normal"
-                InputProps={{
-                    readOnly: true,
-                }}
-            />
-            <TextField 
-                id='standard-email'
-                label='Email'
-                style={styles.textField}
-                value={values.email}
-                // onChange={handleChange('email')}
-                margin='normal'
-                InputProps={{
-                    readOnly: true,
-                }}
-            />
-            <TextField 
-                id='standard-phone'
-                label='Điện thoại'
-                style={styles.textField}
-                value={values.phone}
-                // onChange={handleChange('phone')}
-                margin='normal'
-                InputProps={{
-                    readOnly: true,
-                }}
-            />
-            <TextField
-                id="standard-address"
-                label="Địa chỉ"
-                style={styles.textField}
-                value={values.address}
-                // onChange={handleChange('address')}
-                margin="normal"
-                InputProps={{
-                    readOnly: true,
-                }}
-            />
-            <TextField
-                id="standard-address"
-                label="Website"
-                style={styles.textField}
-                value={values.website}
-                // onChange={handleChange('address')}
-                margin="normal"
-                InputProps={{
-                    readOnly: true,
-                }}
-            />
-            <TextField
-                id="standard-select-degree"
-                select
-                label="Học hàm, Học vị"
-                style={styles.textField}
-                value={values.degree}
-                // onChange={handleChange('degree')}
-                SelectProps={{
-                    MenuProps: {
-                        style: styles.menu,
-                    },
-                }}
-                InputProps={{
-                    readOnly: true,
-                }}
-                helperText="Select degree"
-                margin="normal"
-            >
-                {degrees.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                </MenuItem>
-                ))}
-            </TextField>
-            <TextField
-                id="standard-select-department"
-                select
-                label="Đơn vị"
-                style={styles.textField}
-                value={values.department}
-                // onChange={handleChange('department')}
-                SelectProps={{
-                    MenuProps: {
-                        style: styles.menu,
-                    },
-                }}
-                InputProps={{
-                    readOnly: true,
-                }}
-                helperText="Select department"
-                margin="normal"
-            >
-                {departments.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                </MenuItem>
-                ))}
-            </TextField>
-            <TextField
-                id="standard-field"
-                label="Lĩnh vực nghiên cứu"
-                value={values.field}
-                // onChange={handleChange('description')}
-                multiline
-                rows="4"
-                style={styles.textField}
-                InputProps={{
-                    readOnly: true,
-                }}
-                margin="normal"
-            />
-            <TextField
-                id="standard-multiline-static"
-                label="Mô tả"
-                value={values.description}
-                // onChange={handleChange('description')}
-                multiline
-                rows="4"
-                style={styles.textField}
-                InputProps={{
-                    readOnly: true,
-                }}
-                margin="normal"
-            />
-        </form>
+            <form style={styles.container} noValidate autoComplete="off">
+                <TextField
+                    id="standard-name"
+                    label="Họ tên"
+                    style={styles.textField}
+                    value={values.name}
+                    margin="normal"
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                />
+                <TextField 
+                    id='standard-email'
+                    label='Email'
+                    style={styles.textField}
+                    value={values.email}
+                    margin='normal'
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                />
+                <TextField 
+                    id='standard-phone'
+                    label='Điện thoại'
+                    style={styles.textField}
+                    value={values.phone}
+                    margin='normal'
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                />
+                <TextField
+                    id="standard-address"
+                    label="Địa chỉ"
+                    style={styles.textField}
+                    value={values.address}
+                    margin="normal"
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                />
+                <TextField
+                    id="standard-address"
+                    label="Website"
+                    style={styles.textField}
+                    value={values.website}
+                    margin="normal"
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                />
+                <TextField
+                    id="standard-select-degree"
+                    select
+                    label="Học hàm, Học vị"
+                    style={styles.textField}
+                    value={values.degree}
+                    SelectProps={{
+                        MenuProps: {
+                            style: styles.menu,
+                        },
+                    }}
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    margin="normal"
+                >
+                    {degrees.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                    </MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                    id="standard-select-department"
+                    select
+                    label="Đơn vị"
+                    style={styles.longText}
+                    value={values.department}
+                    SelectProps={{
+                        MenuProps: {
+                            style: styles.menu,
+                        },
+                    }}
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    margin="normal"
+                >
+                    {departments.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                    </MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                    id="standard-field"
+                    label="Lĩnh vực nghiên cứu"
+                    value={values.field}
+                    multiline
+                    rows="4"
+                    style={styles.longText}
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    margin="normal"
+                />
+                <TextField
+                    id="standard-multiline-static"
+                    label="Mô tả"
+                    value={values.description}
+                    multiline
+                    rows="4"
+                    style={styles.longText}
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    margin="normal"
+                />
+            </form>
+        </div>
     );
 }
 
