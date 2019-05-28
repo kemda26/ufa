@@ -7,6 +7,7 @@ import ReadonlyTeacherProfile from './TeacherProfile'
 const axios = require('axios')
 const style = {
         margin: '10px',
+        fontSize: '28px',
 }
 export default function TeacherTable() {
     const [state, setState] = React.useState({
@@ -59,14 +60,22 @@ export default function TeacherTable() {
             .catch(e => {console.log(e)})
     }, [])
 
+
     return (
     <div style={style}>    
         <MaterialTable
             title="Teachers"
             columns={state.columns}
             data={state.data}
+            onRowClick={
+                (event, rowData, togglePanel) => togglePanel()
+            }
             options={{
                 grouping: true,
+                headerStyle: {
+                backgroundColor: '#005e94',
+                color: '#FFF'
+                }
             }}
             detailPanel={rowData => {
                 const {id} = rowData
@@ -74,8 +83,8 @@ export default function TeacherTable() {
                     <ReadonlyTeacherProfile profileID={id}/>
                 )
             }}
-            onRowClick={(event, rowData, togglePanel) => togglePanel()}
         />
     </div>
     );
+
 }
