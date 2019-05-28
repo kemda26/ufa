@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import MaterialTable from 'material-table';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
 const axios = require('axios')
 const style = {
         margin: '10px',
 }
+    
 
 export default function DepartmentTable() {
     const [state, setState] = React.useState({
@@ -69,7 +73,6 @@ export default function DepartmentTable() {
                 console.log(e)
             })
     } 
-
     return (
     <div style={style}>
         <MaterialTable
@@ -79,6 +82,11 @@ export default function DepartmentTable() {
             options={{
                 grouping: true,
                 // selection: true
+                headerStyle: {
+                backgroundColor: '#005e94',
+                color: '#FFF',
+                fontSize: '15px'
+                }
             }}
             editable={{
                 onRowAdd: newData =>
