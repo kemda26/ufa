@@ -125,6 +125,11 @@ export default function DepartmentTable() {
             data={state.data}
             options={{
                 grouping: true,
+                headerStyle: {
+                backgroundColor: '#005e94',
+                color: '#FFF',
+                fontSize: '15px'
+                }
             }}
             editable={{
                 onRowAdd: newData =>
