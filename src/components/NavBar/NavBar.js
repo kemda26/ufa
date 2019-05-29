@@ -57,7 +57,7 @@ function NavBar(props) {
                         <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Ivd-mj3CYUN1hX7B3waACsdHRe0NgyP9qtyyNCZkdJmmhfzS" className={classes.bigAvatar} />
                     </IconButton>
                     <Typography variant="h6" color="inherit" className={classes.grow}>
-                        UFACILITIES
+                        UFACULTIES
                     </Typography>
                     {(state.isLogin || token)? (
                         <React.Fragment>
@@ -69,6 +69,7 @@ function NavBar(props) {
                         ) : (
                         <React.Fragment>
                             <Teachers />
+                            <Department />
                             <SignIn loginHandler={loginHandler}/>
                         </React.Fragment>
                         )

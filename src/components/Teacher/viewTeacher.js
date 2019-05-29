@@ -9,6 +9,7 @@ const style = {
         margin: '10px',
         fontSize: '28px',
 }
+
 export default function TeacherTable() {
     const [state, setState] = React.useState({
         columns: [ 
@@ -30,22 +31,14 @@ export default function TeacherTable() {
             // { title: 'Phone', field: 'phone' },
             
         ],
-        data: [
-            // {
-            //     id: '111111111',
-            //     name: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            //     type: 2,
-            //     email: '@email',
-            //     phone: '321313',
-            //     address: 'E3',
-            //     degree: 3,
-            //     department: 'aa',
-            //     field: 'aaaaa',
-            // },
-        ],
+        data: [],
     });
 
+    const [loading, setLoading] = React.useState(true)
+    const [selectedRow, setSelectedRow] = React.useState(null)
+
     useEffect(() => {
+        setLoading(true)
         let data = []
         axios.get('http://localhost:9000/teachers')
             .then(res => {
@@ -55,6 +48,7 @@ export default function TeacherTable() {
                     let id = _id
                     data.push({id, ...rest})
                     setState({...state, data})
+                    setLoading(false)
                 })
             })
             .catch(e => {console.log(e)})
@@ -65,18 +59,23 @@ export default function TeacherTable() {
     <div style={style}>    
         <MaterialTable
             title="Teachers"
+            isLoading={loading}
             columns={state.columns}
             data={state.data}
-            onRowClick={
-                (event, rowData, togglePanel) => togglePanel()
-            }
+            onRowClick={(event, selectedRow, togglePanel) => {
+                togglePanel()
+                setSelectedRow(selectedRow)
+            }}
             options={{
                 grouping: true,
                 headerStyle: {
-                backgroundColor: '#005e94',
-                color: '#FFF',
-                fontSize: '15px'
-                }
+                    backgroundColor: '#005e94',
+                    color: '#FFF',
+                    fontSize: '15px'
+                },
+                rowStyle: rowData => ({
+                    backgroundColor: (selectedRow && selectedRow.tableData.id === rowData.tableData.id) ? '#EEE' : '#FFF'
+                })
             }}
             detailPanel={rowData => {
                 const {id} = rowData

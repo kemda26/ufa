@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import MaterialTable from 'material-table';
 const axios = require('axios')
 
+const style = {
+    margin: '10px',
+    fontSize: '28px',
+}
+
 export default function DepartmentTable() {
     const [state, setState] = React.useState({
         columns: [  
@@ -14,7 +19,10 @@ export default function DepartmentTable() {
         data: [],
     });
 
+    const [loading, setLoading] = React.useState(true)
+
     useEffect(() => {
+        setLoading(true)
         let data = []
         axios.get('http://localhost:9000/departments')
             .then(res => {
@@ -23,21 +31,29 @@ export default function DepartmentTable() {
                     let id = _id
                     data.push({id, ...rest})
                     setState({...state, data})
+                    setLoading(false)
                 })
             })
             .catch(e => {console.log(e)})
     }, [])
 
     return (
-        <MaterialTable
-            title="Đơn vị"
-            columns={state.columns}
-            data={state.data}
-            options={{
-                grouping: true,
-                // selection: true
-            }}
-            
-        />
+        <div style={style}>
+            <MaterialTable
+                isLoading={loading}
+                title="Đơn vị"
+                columns={state.columns}
+                data={state.data}
+                options={{
+                    grouping: true,
+                    headerStyle: {
+                        backgroundColor: '#005e94',
+                        color: '#FFF',
+                        fontSize: '15px'
+                    }
+                }}
+                
+            />
+        </div>
     )
 }

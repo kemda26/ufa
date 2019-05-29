@@ -2,15 +2,14 @@ import React, { useEffect } from 'react';
 import MaterialTable from 'material-table';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import {withSnackbar} from 'notistack'
 
 const axios = require('axios')
 const style = {
-        margin: '10px',
+    margin: '10px',
 }
-    
 
-export default function DepartmentTable() {
+function DepartmentTable(props) {
     const [state, setState] = React.useState({
         columns: [  
             { title: 'Tên đơn vị', field: 'name' },
@@ -22,7 +21,10 @@ export default function DepartmentTable() {
         data: [],
     });
 
+    const [loading, setLoading] = React.useState(true)
+
     useEffect(() => {
+        setLoading(true)
         let data = []
         axios.get('http://localhost:9000/departments')
             .then(res => {
@@ -31,6 +33,7 @@ export default function DepartmentTable() {
                     let id = _id
                     data.push({id, ...rest})
                     setState({...state, data})
+                    setLoading(false)
                 })
             })
             .catch(e => {console.log(e)})
@@ -46,6 +49,8 @@ export default function DepartmentTable() {
                 const data = [...state.data]
                 data.push(newObj)
                 setState({...state, data})
+                props.enqueueSnackbar('Ok', {variant: 'success', action})
+
             })
             .catch(e => {
                 console.log(e)
@@ -57,6 +62,7 @@ export default function DepartmentTable() {
         axios.patch(`http://localhost:9000/departments/${id}`, {id, ...rest})
             .then(res => {
                 // console.log(res)
+                props.enqueueSnackbar('Ok', {variant: 'success', action})
             })
             .catch(e => {
                 console.log(e)
@@ -68,15 +74,24 @@ export default function DepartmentTable() {
         axios.delete(`http://localhost:9000/departments/${id}`, id)
             .then(res => {
                 // console.log(res)
+                props.enqueueSnackbar('Ok', {variant: 'success', action})
             })
             .catch(e => {
                 console.log(e)
             })
     } 
+
+    const action = (key) => (
+        <Button onClick={() => { props.closeSnackbar(key) }}>
+            {'Dismiss'}
+        </Button>
+    )
+
     return (
     <div style={style}>
         <MaterialTable
             title="Quản lý đơn vị"
+            isLoading= {loading}
             columns={state.columns}
             data={state.data}
             options={{
@@ -99,12 +114,12 @@ export default function DepartmentTable() {
 
                 onRowUpdate: (newData, oldData) =>
                     new Promise(resolve => {
-                        editDataToDb(newData)
                         setTimeout(() => {
                             resolve();
                             const data = [...state.data];
                             data[data.indexOf(oldData)] = newData;
                             setState({ ...state, data });
+                            editDataToDb(newData)
                         }, 500);
                     }),
 
@@ -120,8 +135,10 @@ export default function DepartmentTable() {
                         }, 500);
                     }),
             }}
+            
         />
     </div>
     )
-
 }
+
+export default withSnackbar(DepartmentTable)

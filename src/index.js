@@ -2,8 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App'
 import './index.css'
+import {SnackbarProvider} from 'notistack'
+import {Button} from '@material-ui/core'
+
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+    <SnackbarProvider >
+        <App />
+    </SnackbarProvider>
+    ,document.getElementById('root')
 );

@@ -28,7 +28,10 @@ export default function TeacherTable() {
         data: [],
     });
 
+    const [loading, setLoading] = React.useState(true)
+
     useEffect(() => {
+        setLoading(true)
         let data = []
         axios.get('http://localhost:9000/teachers')
             .then(res => {
@@ -38,6 +41,7 @@ export default function TeacherTable() {
                     let id = _id
                     data.push({id, ...rest})
                     setState({...state, data})
+                    setLoading(false)
                 })
             })
             .catch(e => {console.log(e)})
@@ -68,6 +72,7 @@ export default function TeacherTable() {
     return (
         <MaterialTable
             title="Quản lý giảng viên"
+            isLoading={loading}
             columns={state.columns}
             data={state.data}
             options={{

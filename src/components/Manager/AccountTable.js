@@ -1,44 +1,32 @@
 import React, { useEffect } from 'react';
-import MaterialTable from 'material-table';
+import MaterialTable, { MTableToolbar } from 'material-table';
 import XLSX from 'xlsx'
 import {Button} from '@material-ui/core'
 const axios = require('axios')
+import { withSnackbar } from 'notistack'
 
 const style = {
         margin: '10px',
-        // marginBottom: '',
-        // height: '80%',
 }
 
-export default function DepartmentTable() {
+function DepartmentTable(props) {
     const [state, setState] = React.useState({
         columns: [  
-            // { title: 'Number', field: 'number'},
             { title: 'Tên', field: 'name' },
             { title: 'Tài khoản', field: 'username' },
             { title: 'Mật khẩu', field: 'password' },
             { title: 'Loại tài khoản', field: 'type', lookup: {1:'Quản trị viên', 2:'Giảng viên'}},
             { title: 'Email', field: 'email' },
             { title: 'Điện thoại', field: 'phone' },
-            // { title: 'Degree', field: 'degree', lookup: {3:'PhD', 4:'Bachelor'}},
-            // { title: 'Department', field: 'department'}
         ],
-        data: [
-            {
-                // id: '1',
-                // number: '1',
-                // name: 'Quang',
-                // username: 'quangnd',
-                // password: 'abcxyz',
-                // email: 'ufa@gmail.com',
-                // type: 2,
-                // degree: 3,
-                // department: 'ufa'
-            },
-        ],
+        data: [],
     });
 
+    const [loading, setLoading] = React.useState(true)
+    const [selectedRow, setSelectedRow] = React.useState(null)
+
     useEffect(() => {
+        setLoading(true)
         let data = []
         axios.get('http://localhost:9000/users')
             .then(res => {
@@ -48,6 +36,7 @@ export default function DepartmentTable() {
                     let id = _id
                     data.push({id, ...rest, ...profile})
                     setState({...state, data})
+                    setLoading(false)
                 })
             })
             .catch(e => {console.log(e)})
@@ -69,11 +58,10 @@ export default function DepartmentTable() {
                     let {_id} = res.data
                     let id = _id.toString()
                     let newObj = {id, ...newUser}
-                    // let data = [...state.data]
-                    // ndata.push(newObj)
                     data.push(newObj)
                     setState({...state, data})
-            })
+                    props.enqueueSnackbar('Ok', {variant: 'success', action})
+                })
             .catch(e => {
                 console.log(e)
             })
@@ -93,6 +81,7 @@ export default function DepartmentTable() {
                 let data = [...state.data];
                 data[data.indexOf(oldUser)] = newUser
                 setState({ ...state, data });
+                props.enqueueSnackbar('Ok', {variant: 'success', action})
             })
             .catch(e => {
                 console.log(e)
@@ -113,7 +102,7 @@ export default function DepartmentTable() {
                 let data = [...state.data];
                 data.splice(data.indexOf(oldUser), 1);
                 setState({ ...state, data });
-                // console.log(res)
+                props.enqueueSnackbar('Ok', {variant: 'success', action})
             })
             .catch(e => {
                 console.log(e)
@@ -136,7 +125,6 @@ export default function DepartmentTable() {
                     excel_data.push({name: item[3], username: item[1], password: item[2], email: item[4], phone: '', type: '2'})
                 }
             }
-            // console.log(excel_data)
         }
         reader.readAsArrayBuffer(f)
     }
@@ -146,36 +134,57 @@ export default function DepartmentTable() {
             addUser(item)
             setTimeout(() => {
                 setState({...state, data})
+                props.enqueueSnackbar('Ok', {variant: 'success', action})
             }, 1000)
         })
     }
 
+    const action = (key) => (
+        <Button onClick={() => { props.closeSnackbar(key) }}>
+            {'Dismiss'}
+        </Button>
+    )
 
     return (
     <div style={style}>
-        <input style={{ display: 'none' }} type='file' onChange={convertFile} ref={(e) => loadExcel = e} />
-        <Button onClick={() => loadExcel.click()}>Chọn</Button>
-        <Button onClick={uploadExcel}>Cập nhật</Button>
         <MaterialTable
             title="Quản lý giảng viên"
+            isLoading={loading}
             columns={state.columns}
             data={state.data}
+            components={{
+                Toolbar: props => {
+                    return (
+                        <div>
+                            <MTableToolbar {...props} />
+                            <div style={{display: 'flex', justifyContent:'flex-end', marginRight: '48px', marginBottom: '11px'}}>
+                                <input style={{ display: 'none' }} type='file' onChange={convertFile} ref={(e) => loadExcel = e} />
+                                <Button color='primary' onClick={() => loadExcel.click()}>Chọn Excel</Button>
+                                <Button color='secondary' onClick={uploadExcel}>Cập nhật</Button>
+                            </div>
+                        </div>
+                    )
+                }
+            }}
+            onRowClick={(event, selectedRow) => {
+                setSelectedRow(selectedRow)
+            }}
             options={{
                 grouping: true,
                 headerStyle: {
                     backgroundColor: '#005e94',
                     color: '#FFF',
                     fontSize: '15px'
-                }
+                },
+                rowStyle: rowData => ({
+                    backgroundColor: (selectedRow && selectedRow.tableData.id === rowData.tableData.id) ? '#EEE' : '#FFF'
+                })
             }}
             editable={{
                 onRowAdd: newData =>
                     new Promise(resolve => {
                         setTimeout(() => {
                             resolve();
-                            // const data = [...state.data];
-                            // data.push(newData);
-                            // setState({ ...state, data });
                             addUser(newData)
                         }, 600);
                     }),
@@ -184,9 +193,6 @@ export default function DepartmentTable() {
                     new Promise(resolve => {
                         setTimeout(() => {
                             resolve();
-                            // const data = [...state.data];
-                            // data[data.indexOf(oldData)] = newData;
-                            // setState({ ...state, data });
                             editUser(newData, oldData)
                         }, 600);
                     }),
@@ -195,9 +201,6 @@ export default function DepartmentTable() {
                     new Promise(resolve => {
                         setTimeout(() => {
                             resolve();
-                            // const data = [...state.data];
-                            // data.splice(data.indexOf(oldData), 1);
-                            // setState({ ...state, data });
                             deleteUser(oldData)
                         }, 600);
                     }),
@@ -206,3 +209,5 @@ export default function DepartmentTable() {
     </div>
     );
 }
+
+export default withSnackbar(DepartmentTable)

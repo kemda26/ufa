@@ -15,7 +15,7 @@ function PaperSheet() {
         <div>
             <Paper style={styles.root}>
                 <Typography variant="h5" component="h3">
-                    Welcome to Ufacilities
+                    Welcome to Ufaculties
                 </Typography>
                 <Typography component="p">
                     UFA

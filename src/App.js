@@ -9,7 +9,7 @@ import Home from './components/Home/Home'
 import viewTeacherTable from './components/Teacher/viewTeacher'
 import Footer from './components/Footer/Footer'
 import viewDepartmentTable from './components/Department/viewDepartment'
-import ImportExcel from './components/Excel/ImportEx'
+import UserChangePassword from './components/User/ChangePassword'
 
 export class App extends Component {
     state = {
@@ -19,7 +19,7 @@ export class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div style={{ height: '100%' }}>
+                <div style={{minHeight: '90vh'}}>
                     <NavBar />
                     <Switch>
                         <Route path="/" exact component={Home}/>
@@ -27,12 +27,11 @@ export class App extends Component {
                         <Route path="/manage/users" component={AccountTable}/>
                         <Route path='/user/profile' component={UserProfile}/>
                         <Route path='/user/fields' component={FieldCheckbox}/>
+                        <Route path='/user/password' component={UserChangePassword}/>
                         <Route path='/teachers' component={viewTeacherTable}/>
                         <Route path='/departments' component={viewDepartmentTable}/>
                         {/* <Route path='/teacher/:id' component={TeacherProfile}/> */}
                     </Switch>
-
-                    {/* <ImportExcel /> */}
                 </div>
                 <Footer />
             </BrowserRouter>

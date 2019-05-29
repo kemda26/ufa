@@ -23,7 +23,7 @@ function SimpleMenu(props) {
         props.logoutHandler()
         localStorage.removeItem('token')
         localStorage.removeItem('profileID')
-        setAnchorEl(null);
+        setAnchorEl(null)
     }
 
     return (
@@ -37,6 +37,7 @@ function SimpleMenu(props) {
             </Button>
             <Menu  id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
                 <MenuItem component={Link} to='/user/profile' onClick={handleClose}>Profile</MenuItem>
+                <MenuItem component={Link} to='/user/password' onClick={handleClose}>Change Password</MenuItem>
                 <MenuItem component={Link} to='/user/fields' onClick={handleClose}>Concern Field</MenuItem>
                 <MenuItem onClick={handleLogout} component={Link} to='/'>Logout</MenuItem>
             </Menu>
