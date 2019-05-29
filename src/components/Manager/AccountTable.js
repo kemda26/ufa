@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import MaterialTable from 'material-table';
-
+import XLSX from 'xlsx'
+import {Button} from '@material-ui/core'
 const axios = require('axios')
+
 const style = {
         margin: '10px',
+        // marginBottom: '',
+        // height: '80%',
 }
 
 export default function DepartmentTable() {
@@ -51,24 +55,24 @@ export default function DepartmentTable() {
 
     const token = localStorage.getItem('token')
 
+    let data = [...state.data]
     const addUser = (newUser) => {
         axios({
             url: 'http://localhost:9000/manage/user/add',
             method: 'POST', 
-            data:{...newUser},
+            data: {...newUser},
             headers : {
                 'Authorization': 'Bearer ' + token,
             }
         })
             .then(res => {
-                // console.log(res)
-                let {_id} = res.data
-                // let {name, email, phone} = profile
-                let id = _id.toString()
-                let newObj = {id, ...newUser}
-                const data = [...state.data]
-                data.push(newObj)
-                setState({...state, data})
+                    let {_id} = res.data
+                    let id = _id.toString()
+                    let newObj = {id, ...newUser}
+                    // let data = [...state.data]
+                    // ndata.push(newObj)
+                    data.push(newObj)
+                    setState({...state, data})
             })
             .catch(e => {
                 console.log(e)
@@ -86,7 +90,7 @@ export default function DepartmentTable() {
             }
         })
             .then(res => {
-                const data = [...state.data];
+                let data = [...state.data];
                 data[data.indexOf(oldUser)] = newUser
                 setState({ ...state, data });
             })
@@ -106,7 +110,7 @@ export default function DepartmentTable() {
             }
         })
             .then(res => {
-                const data = [...state.data];
+                let data = [...state.data];
                 data.splice(data.indexOf(oldUser), 1);
                 setState({ ...state, data });
                 // console.log(res)
@@ -114,11 +118,44 @@ export default function DepartmentTable() {
             .catch(e => {
                 console.log(e)
             })
-    } 
+    }
+
+    let loadExcel = null
+    let excel_data = []
+    const convertFile = (e) => {
+        var files = e.target.files, f = files[0]
+        var reader = new FileReader()
+        reader.onload = (e) => {
+            var data = new Uint8Array(e.target.result)
+            var workbook = XLSX.read(data, { type: 'array' })
+            var first_worksheet = workbook.Sheets[workbook.SheetNames[0]]
+            var json_data = XLSX.utils.sheet_to_json(first_worksheet, {header:1})
+            for(let i = 1; i < json_data.length; i++) {
+                let item = json_data[i]
+                if (item.length != 0) {
+                    excel_data.push({name: item[3], username: item[1], password: item[2], email: item[4], phone: '', type: '2'})
+                }
+            }
+            // console.log(excel_data)
+        }
+        reader.readAsArrayBuffer(f)
+    }
+
+    const uploadExcel = () => {
+        excel_data.forEach(item => {
+            addUser(item)
+            setTimeout(() => {
+                setState({...state, data})
+            }, 1000)
+        })
+    }
 
 
     return (
     <div style={style}>
+        <input style={{ display: 'none' }} type='file' onChange={convertFile} ref={(e) => loadExcel = e} />
+        <Button onClick={() => loadExcel.click()}>Chọn</Button>
+        <Button onClick={uploadExcel}>Cập nhật</Button>
         <MaterialTable
             title="Quản lý giảng viên"
             columns={state.columns}
@@ -126,9 +163,9 @@ export default function DepartmentTable() {
             options={{
                 grouping: true,
                 headerStyle: {
-                backgroundColor: '#005e94',
-                color: '#FFF',
-                fontSize: '15px'
+                    backgroundColor: '#005e94',
+                    color: '#FFF',
+                    fontSize: '15px'
                 }
             }}
             editable={{

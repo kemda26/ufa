@@ -116,8 +116,41 @@ function TextFields() {
         field: '',
     });
 
+    const id = localStorage.getItem('profileID')
+
+    const [file, setFile] = React.useState({
+        selectedFile: null
+    })
+
+    const fileSelector = (event) => {
+        setFile({selectedFile: event.target.files[0]})
+    }
+
+    var inputBut = null 
+
+    const fileUploader = () => {
+        const fd = new FormData()
+        fd.append('image', file.selectedFile, file.selectedFile.name)
+        axios.post('https://us-central1-ufaweb-229ce.cloudfunctions.net/uploadFile', fd)
+            .then(res => {
+                setValues({...values, avatar: res.data.url})
+                console.log(res.data.url)
+                const data = {...values, avatar: res.data.url}
+                axios.post(`http://localhost:9000/teacher/${id}`, data)
+                    .then(res => {
+                        console.log(res)
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
+                
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+
     useEffect(() => {
-        let id = localStorage.getItem('profileID')
         // console.log(id)
         axios.get(`http://localhost:9000/teacher/${id}`, id)
             .then(res => {
@@ -130,7 +163,6 @@ function TextFields() {
     }, [])
 
     const handleSubmit = () => {
-        let id = localStorage.getItem('profileID')
         const data = {...values}
         axios.post(`http://localhost:9000/teacher/${id}`, data)
             .then(res => {
@@ -149,7 +181,10 @@ function TextFields() {
         <div style={{width: '900px', margin: '10px auto',display: 'flex',flexDirection: 'row',
                     boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 3px 1px -2px rgba(0,0,0,0.12)'}}>
             <Grid container style={{width: '25%'}} justify="center" alignItems="center">
-                <Avatar alt="avatars" src={values.avatar} style={styles.avatar} />
+                <Avatar alt="avatars" src={values.avatar} style={styles.avatar}  />    
+                <input style={{display: 'none'}} type='file' onChange={fileSelector} ref={thisinput => inputBut = thisinput} />
+                <Button color='primary' onClick={() => inputBut.click()}>Chọn ảnh</Button>
+                <Button color='secondary' onClick={fileUploader}>Đăng ảnh</Button>
             </Grid>
             <form style={styles.container} noValidate autoComplete="off">
                 <TextField
