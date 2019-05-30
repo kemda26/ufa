@@ -12,7 +12,6 @@ const footerStyle = {
     left: '0',
     bottom: '0',
     height: '46px',
-    width: '100%'
 }
 
 const txt = {
@@ -22,7 +21,6 @@ const txt = {
 
 export default function Footer() {
     return (
-        // <div style={{height: '46px', position:'relative'}}>
             <div style={footerStyle}>
                 <div style={txt}>
                     Khoa Công Nghệ Thông Tin - Trường Đại học Công Nghệ - ĐHQGHN
@@ -31,6 +29,5 @@ export default function Footer() {
                     Phòng 301 – Nhà E3 144 – Xuân Thủy, Cầu Giấy, Hà Nội. Điện thoại: (024)37547064. Fax: (024)37547460. Email: fit@vnu.edu.vn.
                 </div>
             </div>
-        // </div>
     );
 }

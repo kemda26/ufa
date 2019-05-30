@@ -15,8 +15,8 @@ function SimpleMenu(props) {
     }
 
     function handleClose() {
-        console.log(props)
-        setAnchorEl(null);
+        // console.log(props)
+        setAnchorEl(null)
     }
 
     const handleLogout = () => {

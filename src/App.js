@@ -19,7 +19,7 @@ export class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div style={{minHeight: '90vh'}}>
+                <div style={{minHeight: '93vh'}}>
                     <NavBar />
                     <Switch>
                         <Route path="/" exact component={Home}/>

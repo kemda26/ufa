@@ -6,15 +6,18 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {withSnackbar} from 'notistack'
 const axios = require('axios')
 
-export default class FormDialog extends React.Component {
+class FormDialog extends React.Component {
     state = {
         open: false,
         user: {
             username: '',
             password: '',
-        }
+        },
+        popper: false,
+        msg: 'dwadwadwda',
     };
 
     handleClickOpen = () => {
@@ -25,14 +28,32 @@ export default class FormDialog extends React.Component {
         this.setState({ open: false });
     };
 
+    action = (key) => (
+        <Button onClick={() => { props.closeSnackbar(key) }}>
+            {'Dismiss'}
+        </Button>
+    )
+
     handleLogin = () => {
         axios.post(`http://localhost:9000/user/login`, this.state.user)
             .then(res => {
-                // console.log(res.data)
-                // console.log(this.props)
-                this.props.loginHandler()
-                localStorage.setItem('token', res.data.token)
-                localStorage.setItem('profileID', res.data.profile)
+                if (res.data.success === false) {
+                    console.log(res.data.message)
+                    this.props.enqueueSnackbar(res.data.message, {
+                        action: this.action,
+                        variant: 'error',
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'center',
+                        },
+                    })
+                }
+                else {
+                    this.props.loginHandler()
+                    localStorage.setItem('token', res.data.token)
+                    localStorage.setItem('profileID', res.data.profile)
+                    localStorage.setItem('userID', res.data.id)
+                }
                 // this.setState({open: false})
             })
             .catch(e => {
@@ -98,3 +119,5 @@ export default class FormDialog extends React.Component {
         );
     }
 }
+
+export default withSnackbar(FormDialog)
