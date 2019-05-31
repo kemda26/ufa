@@ -119,8 +119,9 @@ function TextFields(props) {
         avatar: '',
         department: '',
         phone: '',
-        field: '',
+        field: [],
     });
+    const [fieldState, setFieldState] = React.useState('')
 
     const action = (key) => (
         <Button onClick={() => { props.closeSnackbar(key) }}>
@@ -134,11 +135,10 @@ function TextFields(props) {
         selectedFile: null
     })
 
+    var inputBut = null
     const fileSelector = (event) => {
         setFile({selectedFile: event.target.files[0]})
     }
-
-    var inputBut = null 
 
     const fileUploader = () => {
         const fd = new FormData()
@@ -164,11 +164,13 @@ function TextFields(props) {
     }
 
     useEffect(() => {
-        // console.log(id)
         axios.get(`http://localhost:9000/teacher/${id}`, id)
             .then(res => {
-                // console.log(res.data)
+                let {field} = res.data
                 setValues({...values, ...res.data})
+                field = field.join('\n')
+                console.log(field)
+                setFieldState(field)
             })
             .catch(e => {
                 console.log(e)
@@ -288,12 +290,15 @@ function TextFields(props) {
                     </TextField>
                     <TextField
                         id="standard-field"
-                        label="Lĩnh vực nghiên cứu"
+                        label="Lĩnh vực quan tâm"
                         style={styles.field}
-                        value={values.field}
+                        value={fieldState}
                         multiline
                         onChange={handleChange('field')}
                         margin="normal"
+                        InputProps={{
+                            readOnly: true,
+                        }}
                     />
                     <TextField
                         id="standard-multiline-static"

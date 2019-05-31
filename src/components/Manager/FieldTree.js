@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import data from './test.json'
-import TreeNode from './TreeNode'
+import TreeNode from '../User/TreeNode'
 import {Button} from '@material-ui/core'
 
 

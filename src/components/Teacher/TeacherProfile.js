@@ -120,13 +120,17 @@ function TextFields(props) {
         phone: '',
         field: '',
     });
+    const [fieldState, setFieldState] = React.useState('')
 
     useEffect(() => {
         const id = props.profileID
         console.log(props)
         axios.get(`http://localhost:9000/teacher/${id}`, id)
             .then(res => {
+                let {field} =  res.data
                 setValues({...values, ...res.data})
+                field = field.join('\n')
+                setFieldState(field)
             })
             .catch(e => {
                 console.log(e)
@@ -236,8 +240,8 @@ function TextFields(props) {
                 </TextField>
                 <TextField
                     id="standard-field"
-                    label="Lĩnh vực nghiên cứu"
-                    value={values.field}
+                    label="Lĩnh vực quan tâm"
+                    value={fieldState}
                     multiline
                     rows="4"
                     style={styles.longText}
