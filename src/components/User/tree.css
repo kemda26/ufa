@@ -1,0 +1,88 @@
+/* .ant-select-auto-complete.ant-select .ant-select-selection__rendered {
+    height: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    line-height: 32px;
+  }
+
+  .ant-select-auto-complete.ant-select-allow-clear .ant-select-selection:hover .ant-select-selection__rendered {
+    margin-right: 0 !important;
+  }
+
+  .ant-select-auto-complete.ant-select-lg .ant-select-selection__rendered {
+    line-height: 40px;
+  }
+
+  .ant-select-auto-complete.ant-select-sm .ant-select-selection__rendered {
+    line-height: 24px;
+  }
+
+  .ant-select-selection__rendered {
+    position: relative;
+    display: block;
+    margin-right: 11px;
+    margin-left: 11px;
+    line-height: 30px;
+  }
+  .ant-select-selection__rendered::after {
+    display: inline-block;
+    width: 0;
+    visibility: hidden;
+    content: '.';
+    pointer-events: none;
+  }
+
+  .ant-select-lg .ant-select-selection__rendered {
+    line-height: 38px;
+  }
+
+  .ant-select-lg .ant-select-selection--multiple .ant-select-selection__rendered li {
+    height: 32px;
+    line-height: 32px;
+  }
+
+  .ant-select-sm .ant-select-selection__rendered {
+    margin: 0 7px;
+    line-height: 22px;
+  }
+
+  .ant-select-sm .ant-select-selection--multiple .ant-select-selection__rendered li {
+    height: 16px;
+    line-height: 14px;
+  }
+
+  .ant-select-selection--multiple .ant-select-selection__rendered {
+    height: auto;
+    margin-bottom: -3px;
+    margin-left: 5px;
+  }
+
+.ant-select-selection--multiple > ul > li,
+.ant-select-selection--multiple .ant-select-selection__rendered > ul > li {
+  height: 24px;
+  margin-top: 3px;
+  line-height: 22px;
+}
+
+.ant-select-allow-clear .ant-select-selection--multiple .ant-select-selection__rendered,
+.ant-select-show-arrow .ant-select-selection--multiple .ant-select-selection__rendered {
+  margin-right: 20px;
+}
+
+.ant-select-combobox.ant-select-allow-clear .ant-select-selection:hover .ant-select-selection__rendered,
+.ant-select-combobox.ant-select-show-arrow .ant-select-selection:hover .ant-select-selection__rendered {
+  margin-right: 20px;
+}
+
+.ant-input-group-wrap .ant-select-selection--single .ant-select-selection__rendered {
+    padding-right: 25px;
+    padding-left: 8px;
+    line-height: 30px;
+  } */
+
+/* .ant-select-dropdown .ant-select-tree-dropdown .ant-select-dropdown--multiple .ant-select-dropdown-placement-bottomLeft,
+.ant-select-dropdown::before .ant-select-tree-dropdown::before .ant-select-dropdown--multiple::before .ant-select-dropdown-placement-bottomLeft::before,
+.ant-select-dropdown::after .ant-select-tree-dropdown::after .ant-select-dropdown--multiple::after .ant-select-dropdown-placement-bottomLeft::after {
+    -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+} */

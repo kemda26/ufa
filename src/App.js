@@ -3,7 +3,7 @@ import NavBar from './components/NavBar/NavBar'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import DepartmentTable from './components/Manager/DepartmentTable'
 import AccountTable from './components/Manager/AccountTable'
-import FieldCheckbox from './components/Manager/ReseachTable'
+import FieldCheckbox from './components/User/AntTree'
 import UserProfile from './components/User/Profile'
 import Home from './components/Home/Home'
 import viewTeacherTable from './components/Teacher/viewTeacher'
@@ -19,7 +19,7 @@ export class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div style={{minHeight: '93vh'}}>
+                <div style={{minHeight: '94vh'}}>
                     <NavBar />
                     <Switch>
                         <Route path="/" exact component={Home}/>

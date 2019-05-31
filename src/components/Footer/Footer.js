@@ -22,10 +22,10 @@ const txt = {
 export default function Footer() {
     return (
             <div style={footerStyle}>
-                <div style={txt}>
+                <div>
                     Khoa Công Nghệ Thông Tin - Trường Đại học Công Nghệ - ĐHQGHN
                 </div>
-                <div style={txt}>
+                <div>
                     Phòng 301 – Nhà E3 144 – Xuân Thủy, Cầu Giấy, Hà Nội. Điện thoại: (024)37547064. Fax: (024)37547460. Email: fit@vnu.edu.vn.
                 </div>
             </div>

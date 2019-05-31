@@ -1,0 +1,59 @@
+[
+    {
+        "value": "vp accounting",
+        "title": "VP Accounting",
+        "key": "vp accounting",
+        "children": [
+            {
+                "value": "iway",
+                "title": "iWay",
+                "key": "iway",
+                "children": [
+                {
+                    "value": "Universidad de Especialidades del Espíritu Santo",
+                    "title": "Universidad de Especialidades del Espíritu Santo",
+                    "key": "Universidad de Especialidades del Espíritu Santo",
+                    "children": [
+                        {
+                            "title": "sadw",
+                            "value": "sadw",
+                            "key": "sadw"
+                        }
+                    ]
+                },
+                {
+                    "value": "Marmara University",
+                    "title": "Marmara University",
+                    "key": "Marmara University",
+                    "children": []
+                },
+                {
+                    "value": "Baghdad College of Pharmacy",
+                    "title": "Baghdad College of Pharmacy",
+                    "key": "Baghdad College of Pharmacy",
+                    "children": []
+                }
+                ]
+            },
+            {
+                "value": "KDB",
+                "title": "KDB",
+                "key": "KDB",
+                "children": [
+                {
+                    "value": "Latvian University of Agriculture",
+                    "title": "Latvian University of Agriculture",
+                    "key": "Latvian University of Agriculture",
+                    "children": []
+                },
+                {
+                    "key": "Dublin Institute of Technology",
+                    "value": "Dublin Institute of Technology",
+                    "title": "Dublin Institute of Technology",
+                    "children": []
+                }
+                ]
+            }
+        ]
+    }
+]
