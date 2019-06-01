@@ -68,13 +68,14 @@ function TreeData(props) {
     const handleSubmit = () => {
         let {rowId} = prData
         const data = [...state.data]
-        data.push({parentId: rowId, name: field, rowId: field})
         axios.post('http://localhost:9000/add/fields', {parentId: rowId, name: field, rowId: field})
             .then(res => {
-                console.log(res.data)
+                let {id} = res.data
+                data.push({...res.data})
+                // console.log(res.data)
+                setState({...state, data})
             })
             .catch(e => {console.log(e)})
-        setState({...state, data})
         setOpen(false)
         // console.log(prData)
         // console.log({parentId: rowId, name: field, rowId: field})
@@ -90,9 +91,9 @@ function TreeData(props) {
     }
 
     const deleteField = (oldData) => {
-        let {_id, name} = oldData
-        console.log({_id, name})
-        axios.delete('http://localhost:9000/delete/fields', {id: _id, name})
+        let {_id} = oldData
+        let id = _id
+        axios.delete(`http://localhost:9000/field/${id}`, {id})
             .then(res => {
                 console.log(res.data)
             })
@@ -102,11 +103,11 @@ function TreeData(props) {
     }
 
     const editField = (newData, oldData) => {
-        const {parentId} = oldData
+        const {_id, parentId} = oldData
         const {name, rowId} = newData
-        const data = {name, rowId, parentId}
-        console.log(data)
-        axios.post('http://localhost:9000/edit/fields', data)
+        let id= _id
+        const data = {id, name, rowId, parentId}
+        axios.post(`http://localhost:9000/field/${id}`, data)
             .then(res => {
                 console.log(res)
             })
