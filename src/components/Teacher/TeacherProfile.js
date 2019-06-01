@@ -118,24 +118,24 @@ function TextFields(props) {
         avatar: '',
         department: '',
         phone: '',
-        field: '',
+        field: [],
     });
     const [fieldState, setFieldState] = React.useState('')
-    const [a, setA] = React.useState(null)
 
     useEffect(() => {
         const id = props.profileID
-        console.log(props)
         axios.get(`http://localhost:9000/teacher/${id}`, id)
             .then(async res => {
                 let {field} = res.data
-                setValues({...values, ...res.data})
                 let a = []
-                let b = await Promise.all(field.forEach(i => {
-                    a.push(i.name)
-                }))
-                let str = a.join('\n')
-                setFieldState(str)
+                await field.forEach(i => {
+                    if (i.name) {
+                        a.push(i.name)
+                    }
+                })
+                a = a.join('\n')
+                setValues({...values, ...res.data})
+                setFieldState(a)
             })
             .catch(e => {
                 console.log(e)

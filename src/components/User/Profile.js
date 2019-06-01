@@ -165,12 +165,18 @@ function TextFields(props) {
 
     useEffect(() => {
         axios.get(`http://localhost:9000/teacher/${id}`, id)
-            .then(res => {
+            .then(async res => {
                 let {field} = res.data
+                let a = []
+                await field.forEach(i => {
+                    if (i.name) {
+                        a.push(i.name)
+
+                    }
+                })
+                a = a.join('\n')
                 setValues({...values, ...res.data})
-                field = field.join('\n')
-                console.log(field)
-                setFieldState(field)
+                setFieldState(a)
             })
             .catch(e => {
                 console.log(e)

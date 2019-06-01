@@ -40,14 +40,15 @@ export default function TeacherTable() {
         let data = []
         axios.get('http://localhost:9000/teachers')
             .then(res => {
-                console.log(res.data)
+                setLoading(false)
+                // console.log(res.data)
                 res.data.forEach(item => {
-                    let {_id, ...rest} = item
+                    let {_id, name, avatar, address, degree, department, phone, website, description, email} = item
                     let id = _id
-                    data.push({id, ...rest})
+                    data.push({id, name, avatar, address, degree, department, phone, website, description, email})
                     setState({...state, data})
-                    setLoading(false)
                 })
+                
             })
             .catch(e => {console.log(e)})
     }, [])
