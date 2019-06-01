@@ -3,6 +3,7 @@ import NavBar from './components/NavBar/NavBar'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import DepartmentTable from './components/Manager/DepartmentTable'
 import AccountTable from './components/Manager/AccountTable'
+import FieldTree from './components/Manager/FieldTree'
 import FieldCheckbox from './components/User/AntTree'
 import UserProfile from './components/User/Profile'
 import Home from './components/Home/Home'
@@ -25,6 +26,7 @@ export class App extends Component {
                         <Route path="/" exact component={Home}/>
                         <Route path="/manage/departments" component={DepartmentTable}/>
                         <Route path="/manage/users" component={AccountTable}/>
+                        <Route path="/manage/fields" component={FieldTree}/>
 
                         <Route path='/user/profile' component={UserProfile}/>
                         <Route path='/user/fields' component={FieldCheckbox}/>

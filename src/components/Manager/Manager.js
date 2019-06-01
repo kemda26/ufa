@@ -32,7 +32,7 @@ function SimpleMenu() {
                 <MenuItem component={Link} to='/manage/departments' onClick={handleClose}>Department</MenuItem>
                 <MenuItem component={Link} to='/manage/users' onClick={handleClose}>Account</MenuItem>
                 {/* <MenuItem component={Link} to='/manage/teachers' onClick={handleClose}>Teacher</MenuItem> */}
-                <MenuItem component={Link} to='/manage/researches' onClick={handleClose}>Research</MenuItem>
+                <MenuItem component={Link} to='/manage/fields' onClick={handleClose}>Field</MenuItem>
             </Menu>
         </div>
     );
