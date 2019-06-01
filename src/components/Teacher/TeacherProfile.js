@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import { Button } from '@material-ui/core';
+import { Button, ListItemAvatar } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 const axios = require('axios')
@@ -121,16 +121,21 @@ function TextFields(props) {
         field: '',
     });
     const [fieldState, setFieldState] = React.useState('')
+    const [a, setA] = React.useState(null)
 
     useEffect(() => {
         const id = props.profileID
         console.log(props)
         axios.get(`http://localhost:9000/teacher/${id}`, id)
-            .then(res => {
-                let {field} =  res.data
+            .then(async res => {
+                let {field} = res.data
                 setValues({...values, ...res.data})
-                field = field.join('\n')
-                setFieldState(field)
+                let a = []
+                let b = await Promise.all(field.forEach(i => {
+                    a.push(i.name)
+                }))
+                let str = a.join('\n')
+                setFieldState(str)
             })
             .catch(e => {
                 console.log(e)

@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import MaterialTable, { MTableCell } from 'material-table';
-import { Link } from '@material-ui/core';
-import { Button } from '@material-ui/core';
+import MaterialTable from 'material-table';
 import ReadonlyTeacherProfile from './TeacherProfile'
 
 const axios = require('axios')
