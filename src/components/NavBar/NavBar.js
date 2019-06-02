@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -36,18 +36,27 @@ const style = {
 
 function NavBar(props) {
     const [state, setState] = React.useState({
-        isLogin: false
+        isLogin: false,
+        type: '',
     })
     const token = localStorage.getItem('token')
+    
     const { classes } = props;
 
     const loginHandler = () => {
-        setState({isLogin: true})
+        setState({isLogin: true, type: userType})
     }
 
     const logoutHandler = () => {
         setState({isLogin: false})
     }
+    let userType = ''
+    useEffect(() => {
+        userType = localStorage.getItem('userType')
+        setState({...state, type: userType})
+    }, [])
+
+    
 
     return (
         <div className={classes.root}>
@@ -72,10 +81,7 @@ function NavBar(props) {
                             <Department />
                             <SignIn loginHandler={loginHandler}/>
                         </React.Fragment>
-                        )
-                    }
-                    {/* <SignUp /> */}
-                    {/* <SignIn /> */}
+                    )}
                 </Toolbar>
             </AppBar>
         </div>

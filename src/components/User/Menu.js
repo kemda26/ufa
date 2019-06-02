@@ -23,6 +23,8 @@ function SimpleMenu(props) {
         props.logoutHandler()
         localStorage.removeItem('token')
         localStorage.removeItem('profileID')
+        localStorage.removeItem('userID')
+        localStorage.removeItem('')
         setAnchorEl(null)
     }
 

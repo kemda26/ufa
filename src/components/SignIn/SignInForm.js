@@ -53,6 +53,7 @@ class FormDialog extends React.Component {
                     localStorage.setItem('token', res.data.token)
                     localStorage.setItem('profileID', res.data.profile)
                     localStorage.setItem('userID', res.data.id)
+                    localStorage.setItem('userType', res.data.type)
                 }
                 // this.setState({open: false})
             })
